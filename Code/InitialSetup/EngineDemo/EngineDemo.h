@@ -67,6 +67,7 @@ private:
 	void InitIndicesForMeshNames(const char *const meshNames, int *indices, int numMeshes);
 	void LoadWorldFileAndApplyPCUniforms();
 	void UpdatePartitionText();
+	void InitObj(int index);
 	static bool DestroyObjsCallback(Engine::GraphicalObject *pObj, void *pClassInstance);
 	static void InitEditorObj(Engine::GraphicalObject *pObj, void *pClass);
 	static void SetPCUniforms(Engine::GraphicalObject *pObj, void *pInstance);
@@ -149,4 +150,4 @@ private:
 	Engine::LinkedList<Engine::GraphicalObject*> m_fromWorldEditorOBJs;
 };
 
-#endif // ifndef EngineDemo_H
+#endif // ifndef EngineDemo_h

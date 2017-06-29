@@ -1,7 +1,7 @@
 #include "AStarPathFollowComponent.h"
 #include "SpatialComponent.h"
-#include "MathUtility.h"
 #include "GraphicalObjectComponent.h"
+#include "MathUtility.h"
 #include "CollisionTester.h"
 
 

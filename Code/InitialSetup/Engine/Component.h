@@ -27,6 +27,7 @@ namespace Engine
 
 		virtual bool Initialize() { return true; }
 		virtual bool Update(float /*deltaTime*/) { return true; }
+		virtual bool PhysicsUpdate() { return true; }
 
 		void        SetName(const char* name);
 		const char* GetName() const { return m_name; }

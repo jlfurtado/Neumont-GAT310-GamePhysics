@@ -32,6 +32,8 @@
 #include "UniformData.h"
 #include "FrameBuffer.h"
 #include <winuser.h>
+#include "PhysicsComponent.h"
+#include "PhysicsManager.h"
 
 // Justin Furtado
 // 6/21/2016
@@ -40,6 +42,20 @@
 
 const float EngineDemo::LIGHT_HEIGHT = 15.0f;
 const float EngineDemo::RENDER_DISTANCE = 2000.0f;
+
+namespace {
+	const int MAX_OBJS = 1000;
+	Engine::Entity m_objs[MAX_OBJS];
+	Engine::SpatialComponent m_objSpatials[MAX_OBJS];
+	Engine::GraphicalObjectComponent m_objGobsComps[MAX_OBJS];
+	Engine::GraphicalObject m_objGobs[MAX_OBJS];
+	Engine::Mat4 m_instanceMatrices[MAX_OBJS];
+	Engine::PhysicsComponent m_objPhysics[MAX_OBJS];
+
+	Engine::GraphicalObject m_instanceGob;
+	Engine::InstanceBuffer m_instanceBuffer;
+}
+
 
 bool EngineDemo::Initialize(Engine::MyWindow *window)
 {
@@ -83,6 +99,12 @@ bool EngineDemo::Initialize(Engine::MyWindow *window)
 		return false;
 	}
 
+	if (!Engine::PhysicsManager::Initialize()) 
+	{
+		Engine::GameLogger::Log(Engine::MessageType::cFatal_Error, "Failed to init physics manager!\n");
+		return false;
+	}
+
 	//if (!SoundEngine::Initialize())
 	//{
 	//	Engine::GameLogger::Log(Engine::MessageType::cFatal_Error, "Failed to initialize SoundEngine");
@@ -113,6 +135,7 @@ bool EngineDemo::Shutdown()
 	m_fromWorldEditorOBJs.WalkList(DestroyObjsCallback, this);
 	if (m_objCount != 0) { Engine::GameLogger::Log(Engine::MessageType::cFatal_Error, "Failed to DestroyObjs! Check for memory leak or counter inaccuracy [%d] objs left!\n", m_objCount); return false; }
 
+	if (!Engine::PhysicsManager::Shutdown()) { return false; }
 	if (!Engine::TextObject::Shutdown()) { return false; }
 	if (!Engine::RenderEngine::Shutdown()) { return false; }
 	if (!Engine::ShapeGenerator::Shutdown()) { return false; }
@@ -167,7 +190,7 @@ void EngineDemo::PhysicsCallback(void * game)
 
 void EngineDemo::DoPhysics()
 {
-	//Engine::GameLogger::Log(Engine::MessageType::ConsoleOnly, "Did physics!\n");
+	Engine::PhysicsManager::Update();
 }
 
 void EngineDemo::Update(float dt)
@@ -193,6 +216,16 @@ void EngineDemo::Update(float dt)
 	//}
 
 	m_lights[0].SetTransMat(Engine::Mat4::Translation(playerGraphicalObject.GetPos() + Engine::Vec3(0.0f, 15.0f, 0.0f)));
+
+	for (int i = 0; i < MAX_OBJS; ++i)
+	{
+		m_objs[i].Update(dt);
+		m_objGobs[i].CalcFullTransform();
+		m_instanceMatrices[i] = *m_objGobs[i].GetFullTransformPtr();
+	}
+
+	m_instanceBuffer.UpdateData(&m_instanceMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
+
 }
 
 void EngineDemo::Draw()
@@ -200,8 +233,11 @@ void EngineDemo::Draw()
 	// Clear window
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	m_instanceGob.SetEnabled(false);
 	Engine::RenderEngine::Draw();
+	m_instanceGob.SetEnabled(true);
 
+	Engine::RenderEngine::DrawInstanced(&m_instanceGob, &m_instanceBuffer);
 	if (drawGrid) { Engine::CollisionTester::DrawGrid(Engine::CollisionLayer::STATIC_GEOMETRY, playerGraphicalObject.GetPos()); }
 
 	m_fpsTextObject.RenderText(&m_shaderPrograms[1], debugColorLoc);
@@ -508,6 +544,29 @@ bool EngineDemo::UglyDemoCode()
 	Engine::RenderEngine::AddGraphicalObject(&m_originMarker);
 	
 	LoadWorldFileAndApplyPCUniforms();
+
+	m_instanceBuffer.Initialize(&m_instanceMatrices[0], 16 * sizeof(float), MAX_OBJS, MAX_OBJS * 16, GL_STREAM_DRAW); // todo: ugly code fix 
+
+	Engine::ShapeGenerator::ReadSceneFile("..\\Data\\Scenes\\Soccer.PN.scene", &m_instanceGob, m_shaderPrograms[4].GetProgramId());
+	m_instanceGob.AddPhongUniforms(modelToWorldMatLoc, worldToViewMatLoc, playerCamera.GetWorldToViewMatrixPtr()->GetAddress(), perspectiveMatLoc, m_perspective.GetPerspectivePtr()->GetAddress(),
+		tintColorLoc, diffuseColorLoc, ambientColorLoc, specularColorLoc, specularPowerLoc, diffuseIntensityLoc, ambientIntensityLoc, specularIntensityLoc,
+		&m_instanceGob.GetMatPtr()->m_materialColor, cameraPosLoc, playerCamera.GetPosPtr(), lightLoc, m_lights[0].GetLocPtr());
+	
+	// shader it up
+	m_instanceGob.GetMatPtr()->m_specularIntensity = 32.0f;
+	m_instanceGob.GetMatPtr()->m_ambientReflectivity = Engine::Vec3(0.1f, 0.0f, 0.0f);
+	m_instanceGob.GetMatPtr()->m_diffuseReflectivity = Engine::Vec3(0.7f, 0.0f, 0.0f);
+	m_instanceGob.GetMatPtr()->m_specularReflectivity = Engine::Vec3(0.1f, 0.0f, 0.0f);
+	m_instanceGob.SetScaleMat(Engine::Mat4::Scale(1.0f));
+
+	m_instanceGob.AddUniformData(Engine::UniformData(GL_INT, &numCelLevels, 18));
+	Engine::RenderEngine::AddGraphicalObject(&m_instanceGob);
+	m_instanceGob.CalcFullTransform();
+	for (int i = 0; i < MAX_OBJS; ++i)
+	{
+		InitObj(i);
+	}
+
 	return true;
 }
 
@@ -577,6 +636,31 @@ void EngineDemo::UpdatePartitionText()
 	}
 
 	lastCollisionLayer = currentCollisionLayer;
+}
+
+void EngineDemo::InitObj(int index)
+{
+	// make name for NPC
+	char nameBuffer[7] = "OBJ";
+	nameBuffer[3] = '0' + (char)(index / 100);
+	nameBuffer[4] = '0' + (char)((index % 100) / 10);
+	nameBuffer[4] = '0' + (char)(index % 10);
+	nameBuffer[6] = '\0';
+
+	// place it, some possibly redundant code here
+	Engine::Vec3 pos = Engine::Vec3(0.0f, 250.0f, 0.0f) + Engine::MathUtility::GetRandSphereEdgeVec(Engine::MathUtility::Rand(0.0f, 100.0f));
+	m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
+	m_objSpatials[index].SetPosition(pos);
+	m_objGobsComps[index].SetGraphicalObject(&m_objGobs[index]);
+
+	Engine::PhysicsManager::RegisterComponent(&m_objPhysics[index]);
+
+	// add components to obj and initialize it
+	m_objs[index].SetName(&nameBuffer[0]);
+	m_objs[index].AddComponent(&m_objSpatials[index], "OBJ Spatial");
+	m_objs[index].AddComponent(&m_objGobsComps[index], "OBJ Gob");
+	m_objs[index].AddComponent(&m_objPhysics[index], "OBJ Physics");
+	m_objs[index].Initialize();
 }
 
 bool EngineDemo::DestroyObjsCallback(Engine::GraphicalObject * pObj, void * pClassInstance)

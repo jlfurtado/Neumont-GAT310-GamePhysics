@@ -169,6 +169,8 @@
     <ClInclude Include="MyGL.h" />
     <ClInclude Include="MyWindow.h" />
     <ClInclude Include="Perspective.h" />
+    <ClInclude Include="PhysicsComponent.h" />
+    <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="RenderEngine.h" />
     <ClInclude Include="RenderInfo.h" />
     <ClInclude Include="ShaderProgram.h" />
@@ -225,6 +227,8 @@
     <ClCompile Include="MyWindow.cpp" />
     <ClCompile Include="MyWindow.moc.cpp" />
     <ClCompile Include="Perspective.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="RenderEngine.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="ShapeGenerator.cpp" />
