@@ -36,13 +36,13 @@ namespace Engine
 
 	private:
 		Vec3 m_position;
-		float m_yaw;
-		float m_pitch;
-		float m_roll;
 		Vec3 m_forward;
 		Vec3 m_right;
 		Vec3 m_up;
 		Vec3 m_velocity;
+		float m_yaw;
+		float m_pitch;
+		float m_roll;
 		GraphicalObjectComponent *m_pGobComp{ nullptr };
 	};
 

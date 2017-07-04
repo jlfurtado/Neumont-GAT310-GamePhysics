@@ -7,7 +7,7 @@
 // Manages physics!
 
 #include "ExportHeader.h"
-#include "LinkedList.h"
+#include "DynamicArray.h"
 
 namespace Engine
 {
@@ -22,8 +22,7 @@ namespace Engine
 		static void UnregisterComponent(PhysicsComponent *pCompToRemove);
 
 	private:
-		static bool PhysicsUpdateCallback(PhysicsComponent *pComp, void * pData);
-		static LinkedList<PhysicsComponent *> m_componentPtrs;
+		static DynamicArray<PhysicsComponent *> s_components;
 	};
 }
 

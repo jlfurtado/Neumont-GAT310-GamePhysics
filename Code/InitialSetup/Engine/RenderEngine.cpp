@@ -4,7 +4,6 @@
 #include "BufferManager.h"
 #include "GameLogger.h"
 #include "MyGL.h"
-#include "LinkedList.h"
 
 // Justin Furtado
 // 7/14/2016
@@ -110,8 +109,11 @@ namespace Engine
 				// convenience pointer
 				BufferInfo *pCurrentBufferInfo = pCurrentBufferGroup->GetBufferInfos() + j;
 
+				// get num objs in buffer
+				unsigned objsInBuffer = pCurrentBufferInfo->GetGraphicalObjects()->GetCount();
+
 				// validate input
-				if (pCurrentBufferInfo->GetGraphicalObjectList()->GetCount() <= 0)
+				if (objsInBuffer <= 0)
 				{
 					// no need to setup environment if buffer info list empty
 					continue;
@@ -120,9 +122,13 @@ namespace Engine
 				// attempt to set attribs and bind buffers
 				if (!SetupDrawingEnvironment(pCurrentBufferInfo)) { GameLogger::Log(MessageType::cWarning, "Failed to setup drawing environment for buffer info [%d] of buffer group [%d]! Will not draw from list!\n", j, i); continue; }
 
-				// Loop through and draw all graphical objects in list
-				pCurrentBufferInfo->GetGraphicalObjectList()->WalkList(RenderEngine::DrawSingleObject, nullptr);
+				// get pointer for convenience
+				DynamicArray<GraphicalObject *> *pObjs = pCurrentBufferInfo->GetGraphicalObjects();
 
+				for (unsigned c = 0; c < objsInBuffer; ++c)
+				{
+					DrawSingleObject(pObjs[0][c]);
+				}
 			}
 		}
 
@@ -520,7 +526,8 @@ namespace Engine
 		int attribIndex = 0;
 		int offset = 0;
 
-		Mesh *pMesh = pBufferInfo->GetGraphicalObjectList()->GetFirstObjectData()->GetMeshPointer();
+		Mesh *pMesh = pBufferInfo->GetGraphicalObjects()[0][0]->GetMeshPointer();
+
 		// dynamicaly setup attribs based on vertex format
 		if (pMesh->GetVertexFormat() & VertexFormat::HasPosition) { glEnableVertexAttribArray(attribIndex);	glVertexAttribPointer(attribIndex++, POSITION_COUNT, TYPE, NORMALIZED, pMesh->GetSizeOfVertex(), (void *)offset); offset += POSITION_BYTES; }
 		if (pMesh->GetVertexFormat() & VertexFormat::HasColor) { glEnableVertexAttribArray(attribIndex);	glVertexAttribPointer(attribIndex++, COLOR_COUNT, TYPE, NORMALIZED, pMesh->GetSizeOfVertex(), (void *)offset); offset += COLOR_BYTES; }
@@ -577,7 +584,7 @@ namespace Engine
 		return nullptr;
 	}
 
-	bool RenderEngine::DrawSingleObject(GraphicalObject * pCurrent, void * /*pClassInstance*/)
+	bool RenderEngine::DrawSingleObject(GraphicalObject * pCurrent)
 	{
 		// if the object is enabled
 		if (pCurrent->IsEnabled())

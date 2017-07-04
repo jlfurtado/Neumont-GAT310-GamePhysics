@@ -73,10 +73,12 @@ namespace Engine
 		bool AreGridIndicesValid(int gridX, int gridY, int gridZ);
 		void CleanUp();
 
-		bool m_firstCalculation{ true };
-		float m_gridScale;
-		SpatialTriangleData *m_pData{ nullptr };
+		InstanceBuffer m_gridInstanceBuffer;
+		GraphicalObject m_gridDisplayObject;
 		LinkedList<GraphicalObject*> m_objectList;
+		float m_gridScale;
+		float m_avgGridTriangleCount{ -1.0f };
+		SpatialTriangleData *m_pData{ nullptr };
 		int *m_pGridStartIndices{ nullptr };
 		int *m_pGridTriangleCounts{ nullptr };
 		int m_gridSectionsWidth{ 85 };
@@ -86,9 +88,8 @@ namespace Engine
 		int m_minGridTriangleCount{ -1 };
 		int m_maxGridTriangleCount{ -1 };
 		int m_totalTriangleCount{ -1 };
-		float m_avgGridTriangleCount{ -1.0f };
-		InstanceBuffer m_gridInstanceBuffer;
-		GraphicalObject m_gridDisplayObject;
+		bool m_firstCalculation{ true };
+
 	};
 }
 

@@ -19,9 +19,9 @@ namespace Engine
 
 	struct KeyToggle
 	{
-		bool fireOnPress{ true };
-		bool *pToggle{ nullptr };
 		int vKey{ 0 };
+		bool *pToggle{ nullptr };
+		bool fireOnPress{ true };
 	};
 
 	class ENGINE_SHARED Keyboard

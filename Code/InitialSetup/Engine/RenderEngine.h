@@ -35,12 +35,13 @@ namespace Engine
 
 	private:
 		static const int MAX_SHADER_PROGRAMS = 20;
-		static bool DrawSingleObject(GraphicalObject *pCurrent, void *pClassInstance);
+		static bool DrawSingleObject(GraphicalObject *pCurrent);
 		static GLenum GetIndexType(IndexSizeInBytes indexSize);
 		static bool SetupDrawingEnvironment(BufferInfo *pBufferInfo, int *outIndex = nullptr);
 		static bool SetupAttribs(BufferInfo *pBufferInfo, int *outIndex = nullptr);
 		static bool CopyShaderPrograms(ShaderProgram *pShaderPrograms, GLint shaderProgramCount);
 		static ShaderProgram *GetShaderProgramByID(GLint shaderProgramID);
+
 		static ShaderProgram s_shaderPrograms[MAX_SHADER_PROGRAMS];
 		static GLuint s_nextShaderProgram;
 	};

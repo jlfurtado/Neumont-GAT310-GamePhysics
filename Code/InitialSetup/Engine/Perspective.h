@@ -33,13 +33,13 @@ namespace Engine
 
 	private:
 		// data
+		Mat4 m_perspective;
 		float m_width;
 		float m_height;
 		float m_aspectRatio;
 		float m_fieldOfViewY;
 		float m_nearPlane;
 		float m_farPlane;
-		Mat4 m_perspective;
 	};
 }
 

@@ -8,6 +8,7 @@
 
 #include "ExportHeader.h"
 #include "Component.h"
+#include "Vec3.h"
 
 namespace Engine
 {
@@ -21,10 +22,21 @@ namespace Engine
 
 		bool Initialize() override;
 		bool PhysicsUpdate() override;
+		void CalcCollisionInfo(PhysicsComponent *pOther);
+		void ResolveCollision();
+		void SetRadius(float radius);
+		float GetRadius() const;
+		Vec3 GetPosition() const;
+		void SetMass(float mass);
+		float GetMass() const;
 
-	private:
+	protected:
 		GraphicalObjectComponent *m_pGobComp{ nullptr };
 		SpatialComponent *m_pSpatialComp{ nullptr };
+		Vec3 m_tempPosStore;
+		Vec3 m_tempVelStore;
+		float m_radius{ 1.0f };
+		float m_mass{ 1.0f };
 	};
 }
 

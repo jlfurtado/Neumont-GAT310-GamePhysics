@@ -68,6 +68,9 @@ private:
 	void LoadWorldFileAndApplyPCUniforms();
 	void UpdatePartitionText();
 	void InitObj(int index);
+	void AlignObj(int index);
+	void RandomizeObj(int index);
+	void BounceDefaultDemo(int index);
 	static bool DestroyObjsCallback(Engine::GraphicalObject *pObj, void *pClassInstance);
 	static void InitEditorObj(Engine::GraphicalObject *pObj, void *pClass);
 	static void SetPCUniforms(Engine::GraphicalObject *pObj, void *pInstance);

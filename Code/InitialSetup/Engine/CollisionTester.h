@@ -17,13 +17,14 @@ namespace Engine
 
 	struct ENGINE_SHARED RayCastingOutput
 	{
-		bool m_didIntersect{ false };
-		float m_distance{ 999999.0f };
 		Vec3 m_triangleNormal{ 0.0f, 0.0f, 0.0f };
 		Vec3 m_alphaBetaGamma{ 0.0f, 0.0f, 0.0f };
+		Vec3 m_intersectionPoint{ 0.0f, 0.0f, 0.0f };
+		float m_distance{ 999999.0f };
 		int m_vertexIndex{ -1 };
 		GraphicalObject *m_belongsTo{ nullptr };
-		Vec3 m_intersectionPoint{ 0.0f, 0.0f, 0.0f };
+		bool m_didIntersect{ false };
+
 	};
 
 	enum class ENGINE_SHARED CollisionLayer

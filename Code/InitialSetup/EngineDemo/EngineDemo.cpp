@@ -44,7 +44,7 @@ const float EngineDemo::LIGHT_HEIGHT = 15.0f;
 const float EngineDemo::RENDER_DISTANCE = 2000.0f;
 
 namespace {
-	const int MAX_OBJS = 1000;
+	const int MAX_OBJS = 100; // 1000 for release
 	Engine::Entity m_objs[MAX_OBJS];
 	Engine::SpatialComponent m_objSpatials[MAX_OBJS];
 	Engine::GraphicalObjectComponent m_objGobsComps[MAX_OBJS];
@@ -429,7 +429,20 @@ bool EngineDemo::ProcessInput(float /*dt*/)
 		playerCamera.SetSpeed(Engine::MathUtility::Clamp(playerCamera.GetSpeed() * 1.25f, MIN_SPEED, MAX_SPEED));
 		playerCamera.SetRotateSpeed(Engine::MathUtility::Clamp(playerCamera.GetRotateSpeed() * 1.25f, MIN_ROTATION_SPEED, MAX_ROTATION_SPEED));
 	}
-
+	if (Engine::Keyboard::KeyWasPressed('J'))
+	{
+		for (int i = 0; i < MAX_OBJS; ++i)
+		{
+			RandomizeObj(i);
+		}
+	}
+	if (Engine::Keyboard::KeyWasPressed('K'))
+	{
+		for (int i = 0; i < MAX_OBJS; ++i)
+		{
+			AlignObj(i);
+		}
+	}
 	if (Engine::Keyboard::KeyIsDown(VK_SHIFT))
 	{
 		if (Engine::Keyboard::KeyWasPressed('0')) { currentCollisionLayer = Engine::CollisionLayer::STATIC_GEOMETRY; Engine::CollisionTester::OnlyShowLayer(currentCollisionLayer); }
@@ -638,6 +651,9 @@ void EngineDemo::UpdatePartitionText()
 	lastCollisionLayer = currentCollisionLayer;
 }
 
+const Engine::Vec3 ORIGIN = Engine::Vec3(0.0f, 250.0f, 0.0f);
+const float MAGIC_RADIUS_SCALE = 1.8f; // todo: collider visualization? update const if different model???
+const float MASS_PER_VOLUME = 1.0f;
 void EngineDemo::InitObj(int index)
 {
 	// make name for NPC
@@ -648,9 +664,7 @@ void EngineDemo::InitObj(int index)
 	nameBuffer[6] = '\0';
 
 	// place it, some possibly redundant code here
-	Engine::Vec3 pos = Engine::Vec3(0.0f, 250.0f, 0.0f) + Engine::MathUtility::GetRandSphereEdgeVec(Engine::MathUtility::Rand(0.0f, 100.0f));
-	m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
-	m_objSpatials[index].SetPosition(pos);
+	RandomizeObj(index);
 	m_objGobsComps[index].SetGraphicalObject(&m_objGobs[index]);
 
 	Engine::PhysicsManager::RegisterComponent(&m_objPhysics[index]);
@@ -661,6 +675,60 @@ void EngineDemo::InitObj(int index)
 	m_objs[index].AddComponent(&m_objGobsComps[index], "OBJ Gob");
 	m_objs[index].AddComponent(&m_objPhysics[index], "OBJ Physics");
 	m_objs[index].Initialize();
+}
+
+const int OBJ_PER_DIR = (int)sqrtf(MAX_OBJS/2) + 1;
+void EngineDemo::AlignObj(int index)
+{
+	if (index >= 2)
+	{
+		float scale = Engine::MathUtility::Rand(1.0f, 5.0f);
+
+		Engine::Vec3 pos = ORIGIN + Engine::MathUtility::GetCubification(index, OBJ_PER_DIR, 2, OBJ_PER_DIR, 200.0f);
+		m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
+		m_objSpatials[index].SetPosition(pos);
+		int rand = Engine::MathUtility::Rand(0, 2);
+		float v = Engine::MathUtility::Rand(10.0f, 50.0f);
+		m_objSpatials[index].SetVelocity(Engine::Vec3(0.0f, rand == 1 ? v : -v, 0.0f));
+		m_objGobs[index].SetScaleMat(Engine::Mat4::Scale(scale));
+
+		// radius 4/3 pi r cubed, but all have that coefficient so not really needed...
+		m_objPhysics[index].SetMass(MASS_PER_VOLUME * scale*scale*scale);
+		m_objPhysics[index].SetRadius(MAGIC_RADIUS_SCALE * scale);
+	}
+	else { BounceDefaultDemo(index); }
+}
+
+void EngineDemo::RandomizeObj(int index)
+{
+	if (index >= 2)
+	{
+		float scale = Engine::MathUtility::Rand(1.0f, 5.0f);
+		Engine::Vec3 pos = ORIGIN + Engine::MathUtility::GetRandSphereEdgeVec(Engine::MathUtility::Rand(100.0f, 1000.0f));
+		m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
+		m_objSpatials[index].SetPosition(pos);
+		m_objSpatials[index].SetVelocity(Engine::MathUtility::Rand(10.0f, 50.0f) * (ORIGIN - pos).Normalize());
+		m_objGobs[index].SetScaleMat(Engine::Mat4::Scale(scale));
+
+		// radius 4/3 pi r cubed, but all have that coefficient so not really needed...
+		m_objPhysics[index].SetMass(MASS_PER_VOLUME * scale*scale*scale);
+		m_objPhysics[index].SetRadius(MAGIC_RADIUS_SCALE * scale);
+	}
+	else { BounceDefaultDemo(index); }
+}
+
+void EngineDemo::BounceDefaultDemo(int index)
+{
+	float scale = 1.0f;
+	Engine::Vec3 pos = Engine::Vec3(index == 0 ? 300.0f : 400.0f, 10.0f, -150.0f);
+	m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
+	m_objSpatials[index].SetPosition(pos);
+	m_objSpatials[index].SetVelocity(Engine::Vec3(index == 0 ? 10.0f : -10.0f, 0.0f, 0.0f));
+	m_objGobs[index].SetScaleMat(Engine::Mat4::Scale(scale));
+
+	// mass 4/3 pi r cubed, but all have that coefficient so not really needed...
+	m_objPhysics[index].SetMass(MASS_PER_VOLUME * scale*scale*scale);
+	m_objPhysics[index].SetRadius(MAGIC_RADIUS_SCALE * scale);
 }
 
 bool EngineDemo::DestroyObjsCallback(Engine::GraphicalObject * pObj, void * pClassInstance)

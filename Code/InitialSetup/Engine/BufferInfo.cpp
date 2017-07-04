@@ -108,9 +108,9 @@ namespace Engine
 		return BelongsInBuffer(pGraphicalObjectToCheck->GetMeshPointer());
 	}
 
-	LinkedList<GraphicalObject*>* BufferInfo::GetGraphicalObjectList()
+	DynamicArray<GraphicalObject*>* BufferInfo::GetGraphicalObjects()
 	{
-		return &m_graphicalObjectList;
+		return &m_graphicalObjects;
 	}
 
 	GLuint BufferInfo::GetVertexBufferID()
@@ -192,7 +192,7 @@ namespace Engine
 
 	bool BufferInfo::AddGraphicalObject(GraphicalObject *pGraphicalObjectToAdd)
 	{
-		m_graphicalObjectList.AddToListFront(pGraphicalObjectToAdd);
+		m_graphicalObjects.Add(pGraphicalObjectToAdd);
 
 		GameLogger::Log(MessageType::Process, "BufferInfo successfully added GraphicalObject located at [%p]!\n", pGraphicalObjectToAdd);
 		return true;
@@ -200,12 +200,12 @@ namespace Engine
 
 	void BufferInfo::RemoveGraphicalObject(GraphicalObject * pGraphicalObjectToRemove)
 	{
-		m_graphicalObjectList.RemoveFirstFromList(pGraphicalObjectToRemove);
+		m_graphicalObjects.RemoveFirst(pGraphicalObjectToRemove);
 	}
 
 	bool BufferInfo::ContainedInBuffer(GraphicalObject * pObjToCheck) const
 	{
-		return m_graphicalObjectList.Contains(pObjToCheck);
+		return m_graphicalObjects.Contains(pObjToCheck);
 	}
 }
 

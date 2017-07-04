@@ -39,9 +39,9 @@ namespace Engine
 		static void UnknownType(UniformData *pData);
 
 		UniformMethod m_callback;
+		GLenum m_uniformType;
 		int m_uniformDataLoc;
 		void *m_pUniformData;
-		GLenum m_uniformType;
 		bool m_logForThis;
 	};
 }

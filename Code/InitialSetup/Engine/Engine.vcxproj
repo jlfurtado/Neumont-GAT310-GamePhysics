@@ -143,6 +143,7 @@
     <ClInclude Include="ColorVertex.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ConfigReader.h" />
+    <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="ExportHeader.h" />
     <ClInclude Include="Flocker.h" />

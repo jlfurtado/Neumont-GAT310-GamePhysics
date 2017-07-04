@@ -73,7 +73,7 @@ namespace Engine
 		if (vKey < 0 || vKey > MAX_KEY) { Engine::GameLogger::Log(Engine::MessageType::Warning, "Invalid key [%d] was entered for AddToggle!\n", vKey); return false; }
 		if (!pToggle) { Engine::GameLogger::Log(Engine::MessageType::Error, "Error in AddToggle! Can't toggle nullptr!\n"); return false; }
 
-		s_keyToggles[s_numToggles++] = { onFirePress, pToggle, vKey };
+		s_keyToggles[s_numToggles++] = { vKey, pToggle, onFirePress };
 		return true;
 	}
 

@@ -9,7 +9,7 @@
 #include "Mesh.h"
 #include "VertexFormat.h"
 #include "GraphicalObject.h"
-#include "LinkedList.h"
+#include "DynamicArray.h"
 
 namespace Engine
 {
@@ -30,13 +30,13 @@ namespace Engine
 		bool BelongsInBuffer(GLuint vertexBufferID, GLuint indexBufferID);
 		bool BelongsInBuffer(Mesh *pMeshToCheck);
 		bool BelongsInBuffer(GraphicalObject *pGraphicalObjectToCheck);
-		LinkedList<GraphicalObject*> *GetGraphicalObjectList();
+		DynamicArray<GraphicalObject*> *GetGraphicalObjects();
 		GLuint GetVertexBufferID();
 		GLuint GetIndexBufferID();
 
 	private:
 		// default buffer size for all buffer info from config file here...
-		LinkedList<GraphicalObject*> m_graphicalObjectList;
+		DynamicArray<GraphicalObject*> m_graphicalObjects;
 		GLuint m_vertexBufferID;
 		GLuint m_indexBufferID;
 		GLuint m_vertexBufferOffsetBytes;
