@@ -560,7 +560,7 @@ bool EngineDemo::UglyDemoCode()
 
 	m_instanceBuffer.Initialize(&m_instanceMatrices[0], 16 * sizeof(float), MAX_OBJS, MAX_OBJS * 16, GL_STREAM_DRAW); // todo: ugly code fix 
 
-	Engine::ShapeGenerator::ReadSceneFile("..\\Data\\Scenes\\Soccer.PN.scene", &m_instanceGob, m_shaderPrograms[4].GetProgramId());
+	Engine::ShapeGenerator::ReadSceneFile("..\\Data\\Scenes\\Sphere.PN.scene", &m_instanceGob, m_shaderPrograms[4].GetProgramId());
 	m_instanceGob.AddPhongUniforms(modelToWorldMatLoc, worldToViewMatLoc, playerCamera.GetWorldToViewMatrixPtr()->GetAddress(), perspectiveMatLoc, m_perspective.GetPerspectivePtr()->GetAddress(),
 		tintColorLoc, diffuseColorLoc, ambientColorLoc, specularColorLoc, specularPowerLoc, diffuseIntensityLoc, ambientIntensityLoc, specularIntensityLoc,
 		&m_instanceGob.GetMatPtr()->m_materialColor, cameraPosLoc, playerCamera.GetPosPtr(), lightLoc, m_lights[0].GetLocPtr());
@@ -652,7 +652,7 @@ void EngineDemo::UpdatePartitionText()
 }
 
 const Engine::Vec3 ORIGIN = Engine::Vec3(0.0f, 250.0f, 0.0f);
-const float MAGIC_RADIUS_SCALE = 1.8f; // todo: collider visualization? update const if different model???
+const float MAGIC_RADIUS_SCALE = 1.0f; // todo: collider visualization? update const if different model???
 const float MASS_PER_VOLUME = 1.0f;
 void EngineDemo::InitObj(int index)
 {
@@ -682,7 +682,7 @@ void EngineDemo::AlignObj(int index)
 {
 	if (index >= 2)
 	{
-		float scale = Engine::MathUtility::Rand(1.0f, 5.0f);
+		float scale = Engine::MathUtility::Rand(5.0f, 15.0f);
 
 		Engine::Vec3 pos = ORIGIN + Engine::MathUtility::GetCubification(index, OBJ_PER_DIR, 2, OBJ_PER_DIR, 200.0f);
 		m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
@@ -703,7 +703,7 @@ void EngineDemo::RandomizeObj(int index)
 {
 	if (index >= 2)
 	{
-		float scale = Engine::MathUtility::Rand(1.0f, 5.0f);
+		float scale = Engine::MathUtility::Rand(5.0f, 15.0f);
 		Engine::Vec3 pos = ORIGIN + Engine::MathUtility::GetRandSphereEdgeVec(Engine::MathUtility::Rand(100.0f, 1000.0f));
 		m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
 		m_objSpatials[index].SetPosition(pos);
@@ -719,7 +719,7 @@ void EngineDemo::RandomizeObj(int index)
 
 void EngineDemo::BounceDefaultDemo(int index)
 {
-	float scale = 1.0f;
+	float scale = 5.0f;
 	Engine::Vec3 pos = Engine::Vec3(index == 0 ? 300.0f : 400.0f, 10.0f, -150.0f);
 	m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
 	m_objSpatials[index].SetPosition(pos);
