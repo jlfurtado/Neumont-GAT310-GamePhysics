@@ -29,7 +29,10 @@ namespace Engine
 	{
 		for (unsigned i = 0; i < m_registrations.GetCount(); ++i)
 		{
-			m_registrations[i].pForceGenerator->UpdateForce(m_registrations[i].pParticle, dt);
+			if (m_registrations[i].pForceGenerator->IsEnabled())
+			{
+				m_registrations[i].pForceGenerator->UpdateForce(m_registrations[i].pParticle, dt);
+			}
 		}
 	}
 }

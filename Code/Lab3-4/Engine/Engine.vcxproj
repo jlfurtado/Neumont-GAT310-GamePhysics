@@ -170,6 +170,7 @@
     <ClInclude Include="MyGL.h" />
     <ClInclude Include="MyWindow.h" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleDrag.h" />
     <ClInclude Include="ParticleForceGenerator.h" />
     <ClInclude Include="ParticleForceGeneratorRegistry.h" />
     <ClInclude Include="ParticleGravity.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="MyWindow.cpp" />
     <ClCompile Include="MyWindow.moc.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleDrag.cpp" />
     <ClCompile Include="ParticleForceGeneratorRegistry.cpp" />
     <ClCompile Include="ParticleGravity.cpp" />
     <ClCompile Include="Perspective.cpp" />

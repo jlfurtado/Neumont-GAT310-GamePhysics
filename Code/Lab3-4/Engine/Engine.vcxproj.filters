@@ -219,6 +219,9 @@
     <ClInclude Include="ParticleGravity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleDrag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameLogger.cpp">
@@ -378,6 +381,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ParticleGravity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDrag.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

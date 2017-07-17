@@ -16,6 +16,7 @@
 #include "BitmapLoader.h"
 #include "SoundEngine.h"
 #include "SoundObject.h"
+#include "ParticleGravity.h"
 
 #pragma warning(push)
 #pragma warning(disable : 4251)
@@ -49,6 +50,8 @@ Engine::Mat4 EngineDemo::identity;
 Engine::Vec3 EngineDemo::zero;
 const Engine::Vec3 BASE_ARROW_DIR = Engine::Vec3(1.0f, 0.0f, 0.0f);
 const Engine::Vec3 ORIGIN = Engine::Vec3(0.0f, 0.0f, 250.0f);
+const float MIN_DRAG = 0.0f;
+const float MAX_DRAG = 1.0f;
 
 namespace {
 	const int TYPES = 3;
@@ -61,9 +64,20 @@ namespace {
 	Engine::Mat4 m_velocityArrowMatrices[MAX_OBJS];
 	Engine::Mat4 m_momentumArrowMatrices[MAX_OBJS];
 	Engine::PhysicsComponent m_objPhysics[MAX_OBJS];
-
 	Engine::GraphicalObject m_instanceGob[TYPES];
 	Engine::InstanceBuffer m_instanceBuffer[TYPES];
+
+	Engine::GraphicalObject m_planetGob;
+	Engine::GraphicalObject m_moonGob;
+	Engine::Entity m_planet;
+	Engine::Entity m_moon;
+	Engine::SpatialComponent m_planetSpatial;
+	Engine::SpatialComponent m_moonSpatial;
+	Engine::GraphicalObjectComponent m_planetGobComp;
+	Engine::GraphicalObjectComponent m_moonGobComp;
+	Engine::PhysicsComponent m_planetPhysics;
+	Engine::PhysicsComponent m_moonPhysics;
+	Engine::ParticleGravity m_particleGravity;
 }
 
 bool EngineDemo::Initialize(Engine::MyWindow *window)
@@ -121,6 +135,11 @@ bool EngineDemo::Initialize(Engine::MyWindow *window)
 	//}
 	//backgroundMusic.Initialize("..\\Data\\Sounds\\ElectricalAmbiance.wav");
 
+	toggleDrag = true;
+	modeToggle = true;
+	storeK1 = m_particleDrag.GetK1();
+	storeK2 = m_particleDrag.GetK2();
+	SetModeStuff();
 
 	Engine::CollisionTester::CalculateGrid();
 
@@ -217,81 +236,97 @@ void EngineDemo::Update(float dt)
 	//	backgroundMusic.Play();
 	//}
 
-	bool select = false;
-	if (Engine::MouseManager::IsLeftMouseClicked())
+	if (modeToggle)
 	{
-		Engine::Vec3 origin = Engine::MousePicker::GetOrigin(Engine::MouseManager::GetMouseX(), Engine::MouseManager::GetMouseY());
-		Engine::Vec3 direction = Engine::MousePicker::GetDirection(Engine::MouseManager::GetMouseX(), Engine::MouseManager::GetMouseY());
-		for (int i = 0; i < MAX_OBJS; ++i)
+		bool select = false;
+		if (Engine::MouseManager::IsLeftMouseClicked())
 		{
-			if (Engine::CollisionTester::RaySphereIntersect(origin, direction, m_objSpatials[i].GetPosition(), m_objPhysics[i].GetRadius()))
+			Engine::Vec3 origin = Engine::MousePicker::GetOrigin(Engine::MouseManager::GetMouseX(), Engine::MouseManager::GetMouseY());
+			Engine::Vec3 direction = Engine::MousePicker::GetDirection(Engine::MouseManager::GetMouseX(), Engine::MouseManager::GetMouseY());
+			for (int i = 0; i < MAX_OBJS; ++i)
 			{
-				if (m_sphereIndex >= 0) { Engine::PhysicsManager::RemoveforceGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen); }
-				m_sphereIndex = i;
-				Engine::PhysicsManager::AddForcGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen);
-				select = true;
-				break;
+				if (Engine::CollisionTester::RaySphereIntersect(origin, direction, m_objSpatials[i].GetPosition(), m_objPhysics[i].GetRadius()))
+				{
+					if (m_sphereIndex >= 0) { Engine::PhysicsManager::RemoveforceGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen); }
+					m_sphereIndex = i;
+					Engine::PhysicsManager::AddForcGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen);
+					select = true;
+					break;
+				}
+			}
+
+			if (!select)
+			{
+				Engine::PhysicsManager::RemoveforceGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen);
+				m_sphereIndex = -1;
 			}
 		}
 
-		if (!select)
+		m_selectedSphere.SetEnabled(m_sphereIndex >= 0);
+
+		if (m_sphereIndex >= 0)
 		{
-			Engine::PhysicsManager::RemoveforceGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen);
-			m_sphereIndex = -1; 
+			m_selectedSphere.SetTransMat(Engine::Mat4::Translation(m_objPhysics[m_sphereIndex].GetPosition()));
+			m_selectedSphere.SetScaleMat(Engine::Mat4::Scale(m_objPhysics[m_sphereIndex].GetRadius()));
+			m_selectedSphere.CalcFullTransform();
 		}
+
+		for (int i = 0; i < MAX_OBJS; ++i)
+		{
+			m_objs[i].Update(dt);
+			m_objGobs[i].CalcFullTransform();
+			m_instanceMatrices[i] = *m_objGobs[i].GetFullTransformPtr();
+			Engine::Vec3 v = m_objPhysics[i].GetVelocity();
+			Engine::Vec3 m = m_objPhysics[i].GetMomentum();
+			float len = v.Length();
+			float momentumLen = m.Length();
+			Engine::Mat4 rot = Engine::Mat4::RotationToFace(BASE_ARROW_DIR, v);
+			Engine::Mat4 trans = Engine::Mat4::Translation(rot * (BASE_ARROW_DIR * (len * 2.5f + 0.5f)) + m_objPhysics[i].GetPosition());
+			Engine::Mat4 scale = Engine::Mat4::Scale(len, BASE_ARROW_DIR) * Engine::Mat4::Scale(2.5f);
+			m_velocityArrowMatrices[i] = (trans * (rot * scale));
+			trans = Engine::Mat4::Translation(rot * (BASE_ARROW_DIR * (momentumLen * 2.5f + 0.5f)) + m_objPhysics[i].GetPosition());
+			scale = Engine::Mat4::Scale(momentumLen, BASE_ARROW_DIR) * Engine::Mat4::Scale(2.5f);
+			m_momentumArrowMatrices[i] = (trans * (rot * scale));
+		}
+
+		m_instanceBuffer[0].UpdateData(&m_instanceMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
+		m_instanceBuffer[1].UpdateData(&m_velocityArrowMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
+		m_instanceBuffer[2].UpdateData(&m_momentumArrowMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
 	}
-
-	m_selectedSphere.SetEnabled(m_sphereIndex >= 0);
-
-	if (m_sphereIndex >= 0)
+	else
 	{
-		m_selectedSphere.SetTransMat(Engine::Mat4::Translation(m_objPhysics[m_sphereIndex].GetPosition()));
-		m_selectedSphere.SetScaleMat(Engine::Mat4::Scale(m_objPhysics[m_sphereIndex].GetRadius()));
-		m_selectedSphere.CalcFullTransform();
+		m_planet.Update(dt);
+		m_moon.Update(dt);
+		m_planetGob.CalcFullTransform();
+		m_moonGob.CalcFullTransform();
+
+		// FG = (M1*M2)/(D*D)... M1 in func...
+		Engine::Vec3 toPlanet = m_planetPhysics.GetPosition() - m_moonPhysics.GetPosition();
+		m_particleGravity.SetGravity(toPlanet.Normalize() * (m_planetPhysics.GetMass() / (toPlanet).LengthSquared()));
 	}
-
-	for (int i = 0; i < MAX_OBJS; ++i)
-	{
-		m_objs[i].Update(dt);
-		m_objGobs[i].CalcFullTransform();
-		m_instanceMatrices[i] = *m_objGobs[i].GetFullTransformPtr();
-		Engine::Vec3 v = m_objPhysics[i].GetVelocity();
-		Engine::Vec3 m = m_objPhysics[i].GetMomentum();
-		float len = v.Length();
-		float momentumLen = m.Length();
-		Engine::Mat4 rot = Engine::Mat4::RotationToFace(BASE_ARROW_DIR, v);
-		Engine::Mat4 trans = Engine::Mat4::Translation(rot * (BASE_ARROW_DIR * (len * 2.5f + 0.5f)) + m_objPhysics[i].GetPosition());
-		Engine::Mat4 scale = Engine::Mat4::Scale(len, BASE_ARROW_DIR) * Engine::Mat4::Scale(2.5f);
-		m_velocityArrowMatrices[i] = (trans * (rot * scale));
-		trans = Engine::Mat4::Translation(rot * (BASE_ARROW_DIR * (momentumLen * 2.5f + 0.5f)) + m_objPhysics[i].GetPosition());
-		scale = Engine::Mat4::Scale(momentumLen, BASE_ARROW_DIR) * Engine::Mat4::Scale(2.5f);
-		m_momentumArrowMatrices[i] = (trans * (rot * scale));
-	}
-
-	m_instanceBuffer[0].UpdateData(&m_instanceMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
-	m_instanceBuffer[1].UpdateData(&m_velocityArrowMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
-	m_instanceBuffer[2].UpdateData(&m_momentumArrowMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
-
+	
 	if (debug)
 	{
 		char buffer[256]{ '\0' };
 		char buffer2[256]{ '\0' };
-		if (m_sphereIndex >= 0)
+
+		if (toggleDrag)
 		{
 			Engine::Vec3 m = m_objPhysics[m_sphereIndex].GetMomentum();
-			sprintf_s(&buffer2[0], 256, "Momentum: (%.2f, %.2f, %.2f)\nMass: %.2f\n", m.GetX(), m.GetY(), m.GetZ(), m_objPhysics[m_sphereIndex].GetMass());
-			Engine::GameLogger::Log(Engine::MessageType::ConsoleOnly, "Sphere [%d]: Momentum: (%.2f, %.2f, %.2f) Mass: %.2f\n", m_sphereIndex, m.GetX(), m.GetY(), m.GetZ(), m_objPhysics[m_sphereIndex].GetMass());
+			sprintf_s(&buffer2[0], 256, "K1 (lowSpeed): %.4f\nK2 (highSpeed): %.4f\n", m_particleDrag.GetK1(), m_particleDrag.GetK2());
 		}
-
-		sprintf_s(&buffer[0], 256, "Debug Menu:\n%s%s", m_sphereIndex < 0 ? "Click to select sphere!\n" : &buffer2[0], m_conserveMomentum ? "Conserving Momentum\n" : "Not Conserving Momentum\n");
+	
+		sprintf_s(&buffer[0], 256, "Debug Menu:\n%s", toggleDrag ? &buffer2[0] : "Drag off!");
 		m_debugText.SetupText(0.2f, 0.9f, 0.1f, 1.0f, 0.0f, 1.0f, 0.5f, 1.0f, &buffer[0]);
 	}
 	else
 	{
 		char buffer[256]{ '\0' };
-		sprintf_s(&buffer[0], 256, "Controls:\n%s", "Menus->C/D\nM-Toggle Momentum\nArrows-Move\nScroll-Mass Change");
+		sprintf_s(&buffer[0], 256, "Controls:\n%s", "Menus->C/D\nZ-Toggle Mode\nB-K1, V-K2\nShift-Dir");
 		m_debugText.SetupText(0.2f, 0.9f, 0.1f, 1.0f, 0.0f, 1.0f, 0.5f, 1.0f, &buffer[0]);
 	}
+
+	Engine::PhysicsManager::UpdateForceGens(dt);
 }
 
 void EngineDemo::Draw()
@@ -315,13 +350,16 @@ void EngineDemo::Draw()
 
 	if (drawGrid) { Engine::CollisionTester::DrawGrid(Engine::CollisionLayer::STATIC_GEOMETRY, Engine::Vec3(0.0f)); }
 
-	Engine::RenderEngine::DrawInstanced(&m_instanceGob[0], &m_instanceBuffer[0]);
-	
-	if (debug)
+	if (modeToggle)
 	{
-		glDisable(GL_DEPTH_TEST);
-		Engine::RenderEngine::DrawInstanced(&m_instanceGob[1], &m_instanceBuffer[1]);
-		Engine::RenderEngine::DrawInstanced(&m_instanceGob[2], &m_instanceBuffer[2]);
+		Engine::RenderEngine::DrawInstanced(&m_instanceGob[0], &m_instanceBuffer[0]);
+
+		if (debug)
+		{
+			glDisable(GL_DEPTH_TEST);
+			Engine::RenderEngine::DrawInstanced(&m_instanceGob[1], &m_instanceBuffer[1]);
+			Engine::RenderEngine::DrawInstanced(&m_instanceGob[2], &m_instanceBuffer[2]);
+		}
 	}
 
 
@@ -496,7 +534,7 @@ const float MIN_SPEED = 250.0f / MULTIPLIER;
 const float MAX_SPEED = 250.0f * MULTIPLIER;
 const float MIN_ROTATION_SPEED = 0.8f / MULTIPLIER;
 const float MAX_ROTATION_SPEED = 0.8f * MULTIPLIER;
-bool EngineDemo::ProcessInput(float dt)
+bool EngineDemo::ProcessInput(float /*dt*/)
 {
 	static int spotLightIndex = 0;
 	static bool specToggle = false;
@@ -510,6 +548,35 @@ bool EngineDemo::ProcessInput(float dt)
 	if (Engine::Keyboard::KeyWasPressed('`')) { Engine::ConfigReader::pReader->ProcessConfigFile(); }
 	if (Engine::Keyboard::KeyWasPressed('L')) { Engine::RenderEngine::LogStats(); }
 	if (Engine::Keyboard::KeyWasPressed('G')) { drawGrid = !drawGrid; }
+	if (Engine::Keyboard::KeyWasPressed('N'))
+	{
+		toggleDrag = !toggleDrag;
+		if (!toggleDrag)
+		{
+			storeK1 = m_particleDrag.GetK1();
+			storeK2 = m_particleDrag.GetK2();
+			m_particleDrag.SetCoefficients(0.0f, 0.0f);
+		}
+		else
+		{
+			m_particleDrag.SetCoefficients(storeK1, storeK2);
+		}
+	}
+
+	if (toggleDrag)
+	{
+		float deltaK = Engine::Keyboard::KeyIsDown(VK_SHIFT) ? 0.001f : -0.001f;
+		if (Engine::Keyboard::KeyIsDown('B'))
+		{
+			m_particleDrag.SetK1(Engine::MathUtility::Clamp(m_particleDrag.GetK1() + deltaK, MIN_DRAG, MAX_DRAG));
+		}
+
+		if (Engine::Keyboard::KeyIsDown('V'))
+		{
+			m_particleDrag.SetK2(Engine::MathUtility::Clamp(m_particleDrag.GetK2() + deltaK, MIN_DRAG, MAX_DRAG));
+		}
+	}
+
 
 	if (Engine::Keyboard::KeyWasPressed('J'))
 	{
@@ -525,13 +592,33 @@ bool EngineDemo::ProcessInput(float dt)
 			AlignObj(i);
 		}
 	}
-	
-	Engine::PhysicsManager::UpdateForceGens(dt);
+
+	if (Engine::Keyboard::KeyWasPressed('Z'))
+	{
+		modeToggle = !modeToggle;
+		SetModeStuff();
+	}
 
 	if (Engine::Keyboard::KeyWasPressed('X')) { Shutdown(); return false; }
-	if (Engine::Keyboard::KeyWasPressed('O')) { speedMultiplier -= 0.1f; }
-	if (Engine::Keyboard::KeyWasPressed('Z')) { speedMultiplier += 0.1f; }
 	return true;
+}
+
+void EngineDemo::SetModeStuff()
+{
+	m_planetGob.SetEnabled(!modeToggle);
+	m_moonGob.SetEnabled(!modeToggle);
+	m_selectedSphere.SetEnabled(modeToggle ? m_sphereIndex >= 0 : false);
+
+	for (int i = 0; i < MAX_OBJS; ++i)
+	{
+		m_objPhysics[i].Enable(modeToggle);
+	}
+
+	m_planetPhysics.Enable(!modeToggle);
+	m_moonPhysics.Enable(!modeToggle);
+	m_particleGravity.Enable(!modeToggle);
+	m_particleDrag.Enable(modeToggle);
+	m_inputForceGen.Enable(modeToggle);
 }
 
 void EngineDemo::ShowFrameRate(float dt)
@@ -645,6 +732,66 @@ bool EngineDemo::UglyDemoCode()
 
 	m_lights[0].SetTransMat(Engine::Mat4::Translation(Engine::Vec3(0.0f)));
 
+	m_particleDrag.SetCoefficients(0.001f, 0.001f);
+
+	Engine::ShapeGenerator::ReadSceneFile("..\\Data\\Scenes\\Sphere.PN.scene", &m_planetGob, m_shaderPrograms[2].GetProgramId());
+	m_planetGob.AddPhongUniforms(modelToWorldMatLoc, worldToViewMatLoc, identity.GetAddress(), perspectiveMatLoc, m_perspective.GetPerspectivePtr()->GetAddress(),
+		tintColorLoc, diffuseColorLoc, ambientColorLoc, specularColorLoc, specularPowerLoc, diffuseIntensityLoc, ambientIntensityLoc, specularIntensityLoc,
+		&m_planetGob.GetMatPtr()->m_materialColor, cameraPosLoc, &zero, lightLoc, m_lights[0].GetLocPtr());
+
+	// shader it up
+	m_planetGob.GetMatPtr()->m_specularIntensity = 32.0f;
+	m_planetGob.GetMatPtr()->m_ambientReflectivity = Engine::Vec3(0.1f, 0.0f, 0.0f);
+	m_planetGob.GetMatPtr()->m_diffuseReflectivity = Engine::Vec3(0.7f, 0.0f, 0.0f);
+	m_planetGob.GetMatPtr()->m_specularReflectivity = Engine::Vec3(0.1f, 0.0f, 0.0f);
+	m_planetGob.SetScaleMat(Engine::Mat4::Scale(25.0f));
+
+	m_planetGob.AddUniformData(Engine::UniformData(GL_INT, &numCelLevels, 18));
+	m_planetGob.CalcFullTransform();	
+	m_planetGobComp.SetGraphicalObject(&m_planetGob);
+
+	m_planet.SetName("Planet");
+	m_planet.AddComponent(&m_planetGobComp, "Planet Gob Comp");
+	m_planet.AddComponent(&m_planetSpatial, "Planet Spatial Comp");
+	m_planet.AddComponent(&m_planetPhysics, "Planet Physics Comp");
+	m_planet.Initialize();
+
+	Engine::ShapeGenerator::ReadSceneFile("..\\Data\\Scenes\\Sphere.PN.scene", &m_moonGob, m_shaderPrograms[2].GetProgramId());
+	m_moonGob.AddPhongUniforms(modelToWorldMatLoc, worldToViewMatLoc, identity.GetAddress(), perspectiveMatLoc, m_perspective.GetPerspectivePtr()->GetAddress(),
+		tintColorLoc, diffuseColorLoc, ambientColorLoc, specularColorLoc, specularPowerLoc, diffuseIntensityLoc, ambientIntensityLoc, specularIntensityLoc,
+		&m_moonGob.GetMatPtr()->m_materialColor, cameraPosLoc, &zero, lightLoc, m_lights[0].GetLocPtr());
+
+	// shader it up
+	m_moonGob.GetMatPtr()->m_specularIntensity = 32.0f;
+	m_moonGob.GetMatPtr()->m_ambientReflectivity = Engine::Vec3(0.1f, 0.0f, 0.0f);
+	m_moonGob.GetMatPtr()->m_diffuseReflectivity = Engine::Vec3(0.7f, 0.0f, 0.0f);
+	m_moonGob.GetMatPtr()->m_specularReflectivity = Engine::Vec3(0.1f, 0.0f, 0.0f);
+	m_moonGob.SetScaleMat(Engine::Mat4::Scale(15.0f));
+
+	m_moonGob.AddUniformData(Engine::UniformData(GL_INT, &numCelLevels, 18));
+	m_moonGob.CalcFullTransform();
+	m_moonGobComp.SetGraphicalObject(&m_moonGob);
+
+	m_moon.SetName("Planet");
+	m_moon.AddComponent(&m_moonSpatial, "Planet Spatial Comp");
+	m_moon.AddComponent(&m_moonGobComp, "Planet Gob Comp");
+	m_moon.AddComponent(&m_moonPhysics, "Planet Physics Comp");
+	m_moon.Initialize();
+
+	m_planetPhysics.SetPosition(ORIGIN + Engine::Vec3(0.0f, 0.0f, 0.0f));
+	m_moonPhysics.SetPosition(ORIGIN + Engine::Vec3(0.0f, 75.0f, 0.0f));
+
+	Engine::PhysicsManager::RegisterComponent(&m_planetPhysics);
+	Engine::PhysicsManager::RegisterComponent(&m_moonPhysics);
+	m_planetPhysics.SetMass(100000.0f, false);
+	m_moonPhysics.SetMass(100.0f, false);
+	m_planetPhysics.SetRadius(25.0f);
+	m_moonPhysics.SetRadius(15.0f);
+	m_moonPhysics.SetVelocity(Engine::Vec3(33.0f, 0.0f, 0.0f));
+	Engine::PhysicsManager::AddForcGen(m_moonPhysics.GetParticlePtr(), &m_particleGravity);
+	
+	Engine::RenderEngine::AddGraphicalObject(&m_planetGob);
+	Engine::RenderEngine::AddGraphicalObject(&m_moonGob);
 
 	return true;
 }
@@ -738,6 +885,9 @@ void EngineDemo::InitObj(int index)
 	m_objs[index].AddComponent(&m_objGobsComps[index], "OBJ Gob");
 	m_objs[index].AddComponent(&m_objPhysics[index], "OBJ Physics");
 	m_objs[index].Initialize();
+
+	// give all ze particles drag!
+	Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_particleDrag);
 
 	AlignObj(index);
 }

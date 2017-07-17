@@ -28,7 +28,7 @@ namespace Engine
 		m_pGobComp = GetSiblingComponent<GraphicalObjectComponent>();
 		if (!m_pGobComp) { GameLogger::Log(MessageType::cError, "Cannot do physics! Entity has PhysicsComponent but no GobComponent!\n"); return false; }
 
-		m_particle = Particle(m_pSpatialComp->GetPosition(), m_pSpatialComp->GetVelocity(), 0.9995f, Engine::MathUtility::PI * 4.0f / 3.0f * m_radius * m_radius * m_radius);
+		m_particle = Particle(m_pSpatialComp->GetPosition(), m_pSpatialComp->GetVelocity(), 0.9999f, Engine::MathUtility::PI * 4.0f / 3.0f * m_radius * m_radius * m_radius);
 
 		// todo: log success
 		return true;
@@ -56,6 +56,8 @@ namespace Engine
 		float m1 = GetMass(), m2 = pOther->GetMass();
 		Vec3 v1 = m_particle.GetVelocity(), v2 = pOther->m_particle.GetVelocity();
 		m_tempVelStore = ((v1 * (m1 - m2) + (2 * m2*v2)) / (m1 + m2));
+		//m_particle.ClearAcceleration(); // no need to clear other or it will be cleared twice
+		// todo above according to internet? Confirm elsewhere?
 	}
 
 	void PhysicsComponent::ResolveCollision()

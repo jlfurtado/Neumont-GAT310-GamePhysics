@@ -13,7 +13,7 @@ namespace Engine
 {
 	class Particle; // pre-declare for pointer only needed
 	class ParticleForceGenerator;
-	class ParticleForceGeneratorRegistry
+	class ENGINE_SHARED ParticleForceGeneratorRegistry
 	{
 		struct ParticleForceRegistration
 		{

@@ -26,6 +26,7 @@
 #include "GraphicalObjectComponent.h"
 #include "SpatialComponent.h"
 #include "InputForceGen.h"
+#include "ParticleDrag.h"
 
 class QMouseEvent;
 
@@ -60,6 +61,7 @@ public:
 
 private:
 	// methods
+	void SetModeStuff();
 	bool ReadConfigValues();
 	bool InitializeGL();
 	bool ProcessInput(float dt);
@@ -146,6 +148,10 @@ private:
 	bool m_conserveMomentum{ true };
 	Engine::LinkedList<Engine::GraphicalObject*> m_fromWorldEditorOBJs;
 	InputForceGen m_inputForceGen;
+	Engine::ParticleDrag m_particleDrag;
+	float storeK1, storeK2;
+	bool toggleDrag;
+	bool modeToggle;
 };
 
 #endif // ifndef EngineDemo_h

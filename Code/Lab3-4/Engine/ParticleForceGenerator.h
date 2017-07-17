@@ -15,6 +15,11 @@ namespace Engine
 	{
 	public:
 		virtual void UpdateForce(Particle *pParticle, float dt) = 0;
+		void Enable(bool enabled = true) { m_enabled = enabled; }
+		bool IsEnabled() const { return m_enabled; }
+
+	private:
+		bool m_enabled{ true };
 	};
 }
 
