@@ -696,7 +696,7 @@ bool EngineDemo::UglyDemoCode()
 
 	m_lights[0].SetTransMat(Engine::Mat4::Translation(Engine::Vec3(0.0f)));
 
-	m_particleDrag.SetCoefficients(0.05f, 0.05f);
+	m_particleDrag.SetCoefficients(0.001f, 0.001f);
 
 
 	float size = 1000.0f;
