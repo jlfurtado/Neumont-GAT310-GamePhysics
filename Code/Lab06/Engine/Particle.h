@@ -34,6 +34,7 @@ namespace Engine
 		Vec3 m_velocity;
 		Vec3 m_acceleration;
 		Vec3 m_netForce;
+		Vec3 m_lastAcceleration;
 		float m_dampening;
 		float m_inverseMass;
 	};

@@ -43,7 +43,7 @@
 
 const float MAGIC_RADIUS_SCALE = 1.0f; // todo: collider visualization? update const if different model???
 const float FOUR_THIRDS_PI = Engine::MathUtility::PI * 4.0f / 3.0f;
-const float MASS_PER_VOLUME = 0.001f;
+const float MASS_PER_VOLUME = 0.0001f;
 const float EngineDemo::LIGHT_HEIGHT = 15.0f;
 const float EngineDemo::RENDER_DISTANCE = 2000.0f;
 Engine::Mat4 EngineDemo::identity;
@@ -242,7 +242,7 @@ void EngineDemo::Update(float dt)
 		{
 			Engine::Vec3 origin = Engine::MousePicker::GetOrigin(Engine::MouseManager::GetMouseX(), Engine::MouseManager::GetMouseY());
 			Engine::Vec3 direction = Engine::MousePicker::GetDirection(Engine::MouseManager::GetMouseX(), Engine::MouseManager::GetMouseY());
-			for (int i = 0; i < MAX_OBJS; ++i)
+			for (int i = 0; i < MAX_OBJS - 1; ++i)
 			{
 				if (Engine::CollisionTester::RaySphereIntersect(origin, direction, m_objSpatials[i].GetPosition(), m_objPhysics[i].GetRadius()))
 				{
@@ -373,7 +373,7 @@ const float MAX_RADIUS = 15.0f;
 const float DELTA_RADIUS = 0.001f;
 void EngineDemo::OnMouseScroll(int degrees)
 {
-	if (m_sphereIndex > 0 && m_sphereIndex < 5)
+	if (m_sphereIndex > 0 && m_sphereIndex < MAX_OBJS - 1)
 	{
 		float radius = m_objPhysics[m_sphereIndex].GetRadius();
 		float newRadius = Engine::MathUtility::Clamp(radius + DELTA_RADIUS * degrees, MIN_RADIUS, MAX_RADIUS);
@@ -691,13 +691,12 @@ bool EngineDemo::UglyDemoCode()
 		InitObj(i);
 	}
 
-	m_objPhysics[0].GetParticlePtr()->SetMass(0.0f, false);
 	//m_particleSpring.Init(&posOther, 1.0f, 100.0f);
 	//Engine::PhysicsManager::AddForcGen(m_objPhysics[1].GetParticlePtr(), &m_particleSpring);
 
 	m_lights[0].SetTransMat(Engine::Mat4::Translation(Engine::Vec3(0.0f)));
 
-	m_particleDrag.SetCoefficients(0.01f, 0.01f);
+	m_particleDrag.SetCoefficients(0.0001f, 0.0001f);
 
 
 	float size = 1000.0f;
@@ -718,7 +717,7 @@ bool EngineDemo::UglyDemoCode()
 	//Engine::RenderEngine::AddGraphicalObject(&m_plane);
 	Engine::CollisionTester::AddGraphicalObjectToLayer(&m_plane, Engine::CollisionLayer::STATIC_GEOMETRY);
 	m_plane.CalcFullTransform();
-	m_gravity.SetGravity(Engine::Vec3(0.0f, -10.0f, 0.0f));
+	m_gravity.SetGravity(Engine::Vec3(0.0f, -100.0f, 0.0f));
 
 	return true;
 }
@@ -815,7 +814,7 @@ void EngineDemo::InitObj(int index)
 
 	// give all ze particles drag!
 	Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_particleDrag);
-	if (index < MAX_OBJS - 1)
+	if (index < MAX_OBJS - 1 && index > 0)
 	{
 		Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_gravity);
 	}
@@ -826,7 +825,7 @@ void EngineDemo::InitObj(int index)
 const int OBJ_PER_DIR = (int)sqrtf((float)MAX_OBJS) + 1;
 void EngineDemo::AlignObj(int index)
 {
-	float scale = index < MAX_OBJS - 1 ? 20.0f : 100.0f;
+	float scale = index < MAX_OBJS - 1 ? 15.0f : 100.0f;
 	
 	Engine::Vec3 start = (Engine::Vec3(0.0f, 50.0f, 0.0f) * (float)(index - (MAX_OBJS / 2)));
 	Engine::Vec3 pos = ORIGIN + (index == 0 ? Engine::Vec3(150.0f, 0.0f, 0.0f) : start);
