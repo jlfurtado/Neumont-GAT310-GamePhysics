@@ -24,7 +24,9 @@ namespace Engine
 			ParticleForceGenerator *pForceGenerator;
 
 			bool ParticleForceRegistration::operator==(const ParticleForceRegistration &other) const {
-				return this->pParticle == other.pParticle && this->pForceGenerator == other.pForceGenerator;
+				//GameLogger::Log(MessageType::ConsoleOnly, "(%p %s %p) && (%p %s %p)\n", this->pParticle, (this->pParticle == other.pParticle) ? "==" : "!=", other.pParticle, this->pForceGenerator, (this->pForceGenerator == other.pForceGenerator) ? "==" : "!=", other.pForceGenerator);
+				return ((this->pParticle == other.pParticle)
+					&& (this->pForceGenerator == other.pForceGenerator));
 			}
 
 		};

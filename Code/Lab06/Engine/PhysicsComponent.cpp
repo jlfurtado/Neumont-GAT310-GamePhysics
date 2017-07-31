@@ -51,8 +51,6 @@ namespace Engine
 	{
 		if (m_particle.HasFiniteMass())
 		{
-			//Engine::GameLogger::Log(Engine::MessageType::ConsoleOnly, "Collided %s with %s\n", m_owner->GetName(), pOther->m_owner->GetName());
-
 			Vec3 toOther = pOther->GetPosition() - m_pSpatialComp->GetPosition();
 			float f = toOther.Length() - (pOther->m_radius + m_radius);
 

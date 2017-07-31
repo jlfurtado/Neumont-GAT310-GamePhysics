@@ -237,7 +237,11 @@ void EngineDemo::Update(float dt)
 	bool select = false;
 	if (Engine::MouseManager::IsLeftMouseClicked())
 	{
-		if (m_sphereIndex != -1) { m_sphereIndex = -1; }
+		if (m_sphereIndex != -1) 
+		{
+			Engine::PhysicsManager::RemoveforceGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen); 
+			m_sphereIndex = -1;
+		}
 		else
 		{
 			Engine::Vec3 origin = Engine::MousePicker::GetOrigin(Engine::MouseManager::GetMouseX(), Engine::MouseManager::GetMouseY());
@@ -246,7 +250,6 @@ void EngineDemo::Update(float dt)
 			{
 				if (Engine::CollisionTester::RaySphereIntersect(origin, direction, m_objSpatials[i].GetPosition(), m_objPhysics[i].GetRadius()))
 				{
-					if (m_sphereIndex >= 0) { Engine::PhysicsManager::RemoveforceGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen); }
 					m_sphereIndex = i;
 					Engine::PhysicsManager::AddForcGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen);
 					select = true;
@@ -254,7 +257,7 @@ void EngineDemo::Update(float dt)
 				}
 			}
 
-			if (!select)
+			if (!select && m_sphereIndex >= 0)
 			{
 				Engine::PhysicsManager::RemoveforceGen(m_objPhysics[m_sphereIndex].GetParticlePtr(), &m_inputForceGen);
 				m_sphereIndex = -1;
@@ -696,7 +699,7 @@ bool EngineDemo::UglyDemoCode()
 
 	m_lights[0].SetTransMat(Engine::Mat4::Translation(Engine::Vec3(0.0f)));
 
-	m_particleDrag.SetCoefficients(0.0001f, 0.0001f);
+	m_particleDrag.SetCoefficients(0.1f, 0.1f);
 
 
 	float size = 1000.0f;
@@ -717,7 +720,7 @@ bool EngineDemo::UglyDemoCode()
 	//Engine::RenderEngine::AddGraphicalObject(&m_plane);
 	Engine::CollisionTester::AddGraphicalObjectToLayer(&m_plane, Engine::CollisionLayer::STATIC_GEOMETRY);
 	m_plane.CalcFullTransform();
-	m_gravity.SetGravity(Engine::Vec3(0.0f, -100.0f, 0.0f));
+	m_gravity.SetGravity(Engine::Vec3(0.0f, -1000.0f, 0.0f));
 
 	return true;
 }

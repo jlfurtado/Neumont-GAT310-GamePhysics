@@ -29,9 +29,9 @@ namespace Engine
 			m_position = m_position + m_velocity * dt;
 			m_acceleration = m_inverseMass * m_netForce;
 
-			m_velocity = (m_velocity + (m_acceleration * dt)) * powf(m_dampening, dt);
+			Vec3 deltaV = (m_acceleration * dt);
+			m_velocity = (m_velocity + deltaV) * powf(m_dampening, dt);
 
-			m_lastAcceleration = m_acceleration;
 			m_netForce = Vec3(0.0f);
 		}
 	}
