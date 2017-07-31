@@ -39,7 +39,9 @@ namespace Engine
 				{
 					float r1 = pComp1->GetRadius(), r2 = pComp2->GetRadius();
 					float r = r1 + r2;
-					if ((pComp1->GetPosition() - pComp2->GetPosition()).LengthSquared() < (r*r))
+					bool intersect = ((pComp1->GetPosition() - pComp2->GetPosition()).LengthSquared() < (r*r));
+					bool separating = (pComp1->GetVelocity() - pComp2->GetVelocity()).Dot((pComp1->GetPosition() - pComp2->GetPosition())) >= 0.0f;
+					if (intersect && !separating)
 					{
 						pComp1->CalcCollisionInfo(pComp2);
 						pComp2->CalcCollisionInfo(pComp1);

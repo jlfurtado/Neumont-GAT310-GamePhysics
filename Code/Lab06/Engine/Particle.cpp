@@ -32,6 +32,8 @@ namespace Engine
 			Vec3 deltaV = (m_acceleration * dt);
 			m_velocity = (m_velocity + deltaV) * powf(m_dampening, dt);
 
+			m_lastAcceleration = deltaV;
+
 			m_netForce = Vec3(0.0f);
 		}
 	}
@@ -58,9 +60,18 @@ namespace Engine
 		else { m_inverseMass = 0.0f; }
 	}
 
+	const float restitution = 0.9f;
 	void Particle::SetVelocity(const Vec3 & vel)
 	{
-		m_velocity = vel;
+		if (vel.Length() > 0.1f)
+		{
+			m_velocity = vel * restitution;
+		}
+		else
+		{
+			m_velocity = Vec3::ZERO;
+		}
+		//GameLogger::Log(MessageType::ConsoleOnly, "%.3f, %.3f, %.3f\n", m_velocity.GetX(), m_velocity.GetY(), m_velocity.GetZ());
 	}
 
 	void Particle::SetPosition(const Vec3 & position)

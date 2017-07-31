@@ -7,7 +7,7 @@
 // InputForceGen.h
 // move using input and force
 
-const float STRENGTH = 10000.0f;
+const float STRENGTH = 1000.0f;
 void InputForceGen::UpdateForce(Engine::Particle * pParticle, float /*dt*/)
 {
 	if (Engine::Keyboard::KeyIsDown(VK_UP)) { pParticle->AddForce(Engine::Vec3(0.0f, 1.0f, 0.0f) * STRENGTH); }

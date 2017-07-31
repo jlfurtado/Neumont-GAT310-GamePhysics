@@ -269,8 +269,8 @@ void EngineDemo::Update(float dt)
 
 	if (m_sphereIndex >= 0)
 	{
-		Engine::RayCastingOutput rco = Engine::CollisionTester::FindFromMousePos(Engine::MouseManager::GetMouseX(), Engine::MouseManager::GetMouseY(), RENDER_DISTANCE, Engine::CollisionLayer::NUM_LAYERS);
-		if (rco.m_didIntersect) { m_objPhysics[m_sphereIndex].SetPosition(rco.m_intersectionPoint); }
+		//Engine::RayCastingOutput rco = Engine::CollisionTester::FindFromMousePos(Engine::MouseManager::GetMouseX(), Engine::MouseManager::GetMouseY(), RENDER_DISTANCE, Engine::CollisionLayer::NUM_LAYERS);
+		//if (rco.m_didIntersect) { m_objPhysics[m_sphereIndex].SetPosition(rco.m_intersectionPoint); }
 
 		m_selectedSphere.SetTransMat(Engine::Mat4::Translation(m_objPhysics[m_sphereIndex].GetPosition()));
 		m_selectedSphere.SetScaleMat(Engine::Mat4::Scale(m_objPhysics[m_sphereIndex].GetRadius()));
@@ -559,9 +559,9 @@ bool EngineDemo::ProcessInput(float /*dt*/)
 		}
 	}
 
-	bool shift = Engine::Keyboard::KeyIsDown(VK_SHIFT);
-	float deltaK = shift ? -0.1f : 0.1f;
-	float deltaL = shift ? -0.1f : 0.1f;
+	//bool shift = Engine::Keyboard::KeyIsDown(VK_SHIFT);
+	//float deltaK = shift ? -0.1f : 0.1f;
+	//float deltaL = shift ? -0.1f : 0.1f;
 
 	//if (Engine::Keyboard::KeyIsDown('V'))
 	//{
@@ -699,7 +699,7 @@ bool EngineDemo::UglyDemoCode()
 
 	m_lights[0].SetTransMat(Engine::Mat4::Translation(Engine::Vec3(0.0f)));
 
-	m_particleDrag.SetCoefficients(0.1f, 0.1f);
+	m_particleDrag.SetCoefficients(0.001f, 0.001f);
 
 
 	float size = 1000.0f;
@@ -720,7 +720,7 @@ bool EngineDemo::UglyDemoCode()
 	//Engine::RenderEngine::AddGraphicalObject(&m_plane);
 	Engine::CollisionTester::AddGraphicalObjectToLayer(&m_plane, Engine::CollisionLayer::STATIC_GEOMETRY);
 	m_plane.CalcFullTransform();
-	m_gravity.SetGravity(Engine::Vec3(0.0f, -1000.0f, 0.0f));
+	m_gravity.SetGravity(Engine::Vec3(0.0f, -100.0f, 0.0f));
 
 	return true;
 }
@@ -829,7 +829,7 @@ const int OBJ_PER_DIR = (int)sqrtf((float)MAX_OBJS) + 1;
 void EngineDemo::AlignObj(int index)
 {
 	float scale = index < MAX_OBJS - 1 ? 15.0f : 100.0f;
-	
+
 	Engine::Vec3 start = (Engine::Vec3(0.0f, 50.0f, 0.0f) * (float)(index - (MAX_OBJS / 2)));
 	Engine::Vec3 pos = ORIGIN + (index == 0 ? Engine::Vec3(150.0f, 0.0f, 0.0f) : start);
 	if (index == MAX_OBJS - 1)
