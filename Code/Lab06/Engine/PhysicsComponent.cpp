@@ -53,18 +53,24 @@ namespace Engine
 		{
 			Vec3 toOther = pOther->GetPosition() - m_pSpatialComp->GetPosition();
 			float f = toOther.Length() - (pOther->m_radius + m_radius);
+			Vec3 cn = toOther.Normalize();
 
 			if (pOther->m_particle.HasFiniteMass())
 			{
 				float m1 = GetMass(), m2 = pOther->GetMass();
 				Vec3 v1 = m_particle.GetVelocity(), v2 = pOther->m_particle.GetVelocity();
-				m_tempVelStore = ((v1 * (m1 - m2) + (2 * m2*v2)) / (m1 + m2));
-				m_tempPosStore = (m_pSpatialComp->GetPosition() + (toOther.Normalize() * (f * (m1 / (m1 + m2)))));
+
+				float a1 = cn.Dot(v1);
+				float a2 = cn.Dot(v2);
+				float p = (2 * (a2 - a1)) / (m1 + m2);
+				m_tempVelStore = v1 + (p*m1*cn);
+				
+				m_tempPosStore = (m_pSpatialComp->GetPosition() + (cn * (f * (m1 / (m1 + m2)))));
 			}
 			else
 			{
 				m_tempVelStore = -m_particle.GetVelocity(); // cheeze 
-				m_tempPosStore = (m_pSpatialComp->GetPosition() + (toOther.Normalize() * (f)));
+				m_tempPosStore = (m_pSpatialComp->GetPosition() + (cn * (f)));
 			}
 		}
 		else
@@ -94,6 +100,11 @@ namespace Engine
 	void PhysicsComponent::SetRadius(float radius)
 	{
 		m_radius = radius;
+	}
+
+	void PhysicsComponent::ClearForces()
+	{
+		m_particle.ClearForces();
 	}
 
 	float PhysicsComponent::GetRadius() const

@@ -28,6 +28,7 @@ namespace Engine
 		Vec3 GetPosition() const;
 		Vec3 GetVelocity() const;
 		bool HasFiniteMass() const;
+		void ClearForces();
 
 	private:
 		Vec3 m_position;

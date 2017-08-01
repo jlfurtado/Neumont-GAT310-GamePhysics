@@ -29,6 +29,7 @@ namespace Engine
 		void SetPosition(const Vec3& pos);
 		void SetVelocity(const Vec3& vel);
 		void SetRadius(float radius);
+		void ClearForces();
 		float GetRadius() const;
 		Vec3 GetPosition() const;
 		Vec3 GetVelocity() const;

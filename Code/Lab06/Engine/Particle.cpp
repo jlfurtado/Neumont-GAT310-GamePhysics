@@ -33,8 +33,7 @@ namespace Engine
 			m_velocity = (m_velocity + deltaV) * powf(m_dampening, dt);
 
 			m_lastAcceleration = deltaV;
-
-			m_netForce = Vec3(0.0f);
+			ClearForces();
 		}
 	}
 
@@ -60,7 +59,7 @@ namespace Engine
 		else { m_inverseMass = 0.0f; }
 	}
 
-	const float restitution = 0.9f;
+	const float restitution = 0.85f;
 	void Particle::SetVelocity(const Vec3 & vel)
 	{
 		if (vel.Length() > 0.1f)
@@ -102,6 +101,11 @@ namespace Engine
 	bool Particle::HasFiniteMass() const
 	{
 		return m_inverseMass > 0.0f;
+	}
+
+	void Particle::ClearForces()
+	{
+		m_netForce = Vec3(0.0f);
 	}
 }
 

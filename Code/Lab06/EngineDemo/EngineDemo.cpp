@@ -845,9 +845,9 @@ void EngineDemo::AlignObj(int index)
 	m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
 	m_objPhysics[index].SetPosition(pos);
 	m_objPhysics[index].SetVelocity(Engine::Vec3(0.0f));
+	m_objPhysics[index].ClearForces();
 	m_objGobs[index].SetScaleMat(Engine::Mat4::Scale(scale));
-	
-	// radius 4/3 pi r cubed, but all have that coefficient so not really needed...
+
 	m_objPhysics[index].SetRadius(MAGIC_RADIUS_SCALE * scale);
 }
 
