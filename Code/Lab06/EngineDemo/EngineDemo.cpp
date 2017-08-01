@@ -55,7 +55,7 @@ const float MAX_DRAG = 1.0f;
 
 namespace {
 	const int TYPES = 3;
-	const int MAX_OBJS = 6;
+	const int MAX_OBJS = 6; // 7; // 8;
 	Engine::Entity m_objs[MAX_OBJS];
 	Engine::SpatialComponent m_objSpatials[MAX_OBJS];
 	Engine::GraphicalObjectComponent m_objGobsComps[MAX_OBJS];
@@ -829,7 +829,7 @@ const int OBJ_PER_DIR = (int)sqrtf((float)MAX_OBJS) + 1;
 void EngineDemo::AlignObj(int index)
 {
 	float scale = index < MAX_OBJS - 1 ? 15.0f : 100.0f;
-
+	//if (index == 0) { scale = 5.0f; }
 	Engine::Vec3 start = (Engine::Vec3(0.0f, 50.0f, 0.0f) * (float)(index - (MAX_OBJS / 2)));
 	Engine::Vec3 pos = ORIGIN + (index == 0 ? Engine::Vec3(150.0f, 0.0f, 0.0f) : start);
 	if (index == MAX_OBJS - 1)

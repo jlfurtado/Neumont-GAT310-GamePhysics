@@ -54,14 +54,14 @@ namespace Engine
 			Vec3 toOther = pOther->GetPosition() - m_pSpatialComp->GetPosition();
 			float f = toOther.Length() - (pOther->m_radius + m_radius);
 			Vec3 cn = toOther.Normalize();
+			Vec3 v1 = m_particle.GetVelocity(), v2 = pOther->m_particle.GetVelocity();
+			float a1 = cn.Dot(v1);
+			float a2 = cn.Dot(v2);
 
 			if (pOther->m_particle.HasFiniteMass())
 			{
 				float m1 = GetMass(), m2 = pOther->GetMass();
-				Vec3 v1 = m_particle.GetVelocity(), v2 = pOther->m_particle.GetVelocity();
 
-				float a1 = cn.Dot(v1);
-				float a2 = cn.Dot(v2);
 				float p = (2 * (a2 - a1)) / (m1 + m2);
 				m_tempVelStore = v1 + (p*m1*cn);
 				
@@ -69,7 +69,7 @@ namespace Engine
 			}
 			else
 			{
-				m_tempVelStore = -m_particle.GetVelocity(); // cheeze 
+				m_tempVelStore = v1 - 2*a1*cn;
 				m_tempPosStore = (m_pSpatialComp->GetPosition() + (cn * (f)));
 			}
 		}
