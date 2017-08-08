@@ -71,7 +71,7 @@ private:
 	void LoadWorldFileAndApplyPCUniforms();
 	void UpdatePartitionText();
 	void InitObj(int index);
-	void AlignObj(int index);
+	void AlignObj(int index, bool randRad);
 	void DetachObj(int index);
 	static bool DestroyObjsCallback(Engine::GraphicalObject *pObj, void *pClassInstance);
 	static void InitEditorObj(Engine::GraphicalObject *pObj, void *pClass);

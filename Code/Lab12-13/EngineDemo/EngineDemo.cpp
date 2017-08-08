@@ -390,7 +390,7 @@ void EngineDemo::OnResizeWindow()
 const float MIN_RADIUS = 5.0f;
 const float MAX_RADIUS = 15.0f;
 const float DELTA_RADIUS = 0.001f;
-void EngineDemo::OnMouseScroll(int degrees)
+void EngineDemo::OnMouseScroll(int /*degrees*/)
 {
 	//if (m_sphereIndex > 0 && m_sphereIndex < MAX_OBJS - 1)
 	//{
@@ -593,7 +593,7 @@ bool EngineDemo::ProcessInput(float /*dt*/)
 	{
 		for (int i = 0; i < MAX_OBJS; ++i)
 		{
-			AlignObj(i);
+			AlignObj(i, Engine::Keyboard::KeyIsDown(VK_SHIFT));
 		}
 	}
 
@@ -679,9 +679,9 @@ bool EngineDemo::UglyDemoCode()
 	
 	// shader it up
 	m_instanceGob[0].GetMatPtr()->m_specularIntensity = 32.0f;
-	m_instanceGob[0].GetMatPtr()->m_ambientReflectivity = Engine::Vec3(0.1f, 0.0f, 0.0f);
-	m_instanceGob[0].GetMatPtr()->m_diffuseReflectivity = Engine::Vec3(0.7f, 0.0f, 0.0f);
-	m_instanceGob[0].GetMatPtr()->m_specularReflectivity = Engine::Vec3(0.1f, 0.0f, 0.0f);
+	m_instanceGob[0].GetMatPtr()->m_ambientReflectivity = Engine::Vec3(0.1f, 0.1f, 0.0f);
+	m_instanceGob[0].GetMatPtr()->m_diffuseReflectivity = Engine::Vec3(0.7f, 0.7f, 0.0f);
+	m_instanceGob[0].GetMatPtr()->m_specularReflectivity = Engine::Vec3(0.1f, 0.1f, 0.0f);
 	m_instanceGob[0].SetScaleMat(Engine::Mat4::Scale(1.0f));
 
 	m_instanceGob[0].AddUniformData(Engine::UniformData(GL_INT, &numCelLevels, 18));
@@ -696,7 +696,7 @@ bool EngineDemo::UglyDemoCode()
 	m_instanceGob[1].AddUniformData(Engine::UniformData(GL_FLOAT, &m_instanceGob[1].GetMatPtr()->m_specularIntensity, tintIntensityLoc));
 
 	m_instanceGob[1].GetMatPtr()->m_specularIntensity = 0.7f;
-	m_instanceGob[1].GetMatPtr()->m_materialColor = Engine::Vec3(0.0f, 1.0f, 0.0f);
+	m_instanceGob[1].GetMatPtr()->m_materialColor = Engine::Vec3(1.0f, 0.0f, 0.0f);
 
 	Engine::RenderEngine::AddGraphicalObject(&m_instanceGob[1]);
 	m_instanceGob[1].CalcFullTransform();
@@ -709,7 +709,7 @@ bool EngineDemo::UglyDemoCode()
 	m_instanceGob[2].AddUniformData(Engine::UniformData(GL_FLOAT, &m_instanceGob[2].GetMatPtr()->m_specularIntensity, tintIntensityLoc));
 
 	m_instanceGob[2].GetMatPtr()->m_specularIntensity = 0.7f;
-	m_instanceGob[2].GetMatPtr()->m_materialColor = Engine::Vec3(1.0f, 1.0f, 0.0f);
+	m_instanceGob[2].GetMatPtr()->m_materialColor = Engine::Vec3(0.0f, 1.0f, 0.0f);
 
 	Engine::RenderEngine::AddGraphicalObject(&m_instanceGob[2]);
 	m_instanceGob[2].CalcFullTransform();
@@ -858,16 +858,17 @@ void EngineDemo::InitObj(int index)
 		Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_gravity);
 	}
 
-	AlignObj(index);
+	AlignObj(index, false);
 }
 
 const int OBJ_PER_DIR = (int)sqrtf((float)MAX_OBJS) + 1;
-void EngineDemo::AlignObj(int index)
+void EngineDemo::AlignObj(int index, bool randRad)
 {
 	float scale = 25.0f; // todo vary?
 
+	float radius = randRad ? Engine::MathUtility::Rand(100.0f, 200.0f) : 150.0f;
 	float theta = (index / (1.0f * NUM_ATTACHMENTS)) * (2.0f * Engine::MathUtility::PI);
-	Engine::Vec3 start = Engine::Vec3(sinf(theta), cosf(theta), 0.0f) * 150.0f;
+	Engine::Vec3 start = Engine::Vec3(sinf(theta), cosf(theta), 0.0f) * radius;
 	Engine::Vec3 pos = ORIGIN + (index == 0 ? Engine::Vec3::ZERO : start);
 
 	m_objPhysics[index].SetMass(MASS_PER_VOLUME * FOUR_THIRDS_PI * scale*scale*scale, false);

@@ -21,7 +21,7 @@ namespace Engine
 	void ParticleAttachment::Detach()
 	{
 		if (!IsAttached()) { return; }
-		m_pParticle->SetVelocity(GetRotationalVelocity()); 
+		m_pParticle->SetVelocity(GetRotationalVelocity() + m_pAttachTo->GetVelocity()); 
 		m_pAttachTo = nullptr;
 		m_pParticle = nullptr;
 	}
