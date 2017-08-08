@@ -19,6 +19,7 @@ namespace Engine
 		void Detach();
 		void Update(float dt);
 		Vec3 GetRotationalVelocity() const;
+		bool IsAttached() const;
 
 	private:
 		Particle *m_pParticle{ nullptr };

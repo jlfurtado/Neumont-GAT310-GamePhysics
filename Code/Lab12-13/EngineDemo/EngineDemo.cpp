@@ -55,7 +55,7 @@ const float MIN_DRAG = 0.0f;
 const float MAX_DRAG = 1.0f;
 
 namespace {
-	const int TYPES = 3;
+	const int TYPES = 4;
 	const int MAX_OBJS = 6; // 7; // 8;
 	const int NUM_ATTACHMENTS = MAX_OBJS - 1;
 	Engine::Entity m_objs[MAX_OBJS];
@@ -268,7 +268,6 @@ void EngineDemo::Update(float dt)
 
 	}
 
-
 	for (int i = 0; i < NUM_ATTACHMENTS; ++i)
 	{
 		m_particleAttachments[i].Update(dt);
@@ -279,22 +278,43 @@ void EngineDemo::Update(float dt)
 		m_objs[i].Update(dt);
 		m_objGobs[i].CalcFullTransform();
 		m_instanceMatrices[i] = *m_objGobs[i].GetFullTransformPtr();
-		Engine::Vec3 v = m_objPhysics[i].GetVelocity();
-		Engine::Vec3 rv = i == 0 ? Engine::Vec3::ZERO : m_particleAttachments[i -1].GetRotationalVelocity();
+		
+		Engine::Vec3 v, tv, rv;
+		if (i == 0 || !m_particleAttachments[i - 1].IsAttached())
+		{
+			rv = Engine::Vec3::ZERO;
+			tv = Engine::Vec3::ZERO;
+			v = m_objPhysics[i].GetVelocity();
+		}
+		else
+		{
+			rv = m_particleAttachments[i - 1].GetRotationalVelocity();
+			tv = m_objPhysics[i].GetParticlePtr()->GetPosition() - m_objPhysics[0].GetPosition();
+			v = rv + m_objPhysics[0].GetVelocity();	
+		}
+
 		float len = v.Length();
 		float rvLen = rv.Length();
+		float tvLen = tv.Length();
 		Engine::Mat4 rot = Engine::Mat4::RotationToFace(BASE_ARROW_DIR, v);
 		Engine::Mat4 trans = Engine::Mat4::Translation(rot * (BASE_ARROW_DIR * (len * 2.5f + 0.5f)) + m_objPhysics[i].GetPosition());
 		Engine::Mat4 scale = Engine::Mat4::Scale(len, BASE_ARROW_DIR) * Engine::Mat4::Scale(2.5f);
 		m_worldVelocityArrowMatrices[i] = (trans * (rot * scale));
+		rot = Engine::Mat4::RotationToFace(BASE_ARROW_DIR, rv);
 		trans = Engine::Mat4::Translation(rot * (BASE_ARROW_DIR * (rvLen * 2.5f + 0.5f)) + m_objPhysics[i].GetPosition());
 		scale = Engine::Mat4::Scale(rvLen, BASE_ARROW_DIR) * Engine::Mat4::Scale(2.5f);
 		m_instantaneousVelocityArrowMatrices[i] = (trans * (rot * scale));
+		rot = Engine::Mat4::RotationToFace(BASE_ARROW_DIR, tv);
+		trans = Engine::Mat4::Translation(rot * (BASE_ARROW_DIR * (tvLen * 0.5f + 0.5f)) + m_objPhysics[0].GetPosition());
+		scale = Engine::Mat4::Scale(tvLen, BASE_ARROW_DIR) * Engine::Mat4::Scale(0.5f);
+		m_otherArrows[i] = (trans * (rot * scale));
 	}
 
 	m_instanceBuffer[0].UpdateData(&m_instanceMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
 	m_instanceBuffer[1].UpdateData(&m_instantaneousVelocityArrowMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
 	m_instanceBuffer[2].UpdateData(&m_worldVelocityArrowMatrices[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
+	m_instanceBuffer[3].UpdateData(&m_otherArrows[0], 0, 16 * sizeof(float)*MAX_OBJS, MAX_OBJS);
+
 	// TODO: OTHER ARROWS!!!
 	
 	if (debug)
@@ -349,6 +369,7 @@ void EngineDemo::Draw()
 		glDisable(GL_DEPTH_TEST);
 		Engine::RenderEngine::DrawInstanced(&m_instanceGob[1], &m_instanceBuffer[1]);
 		Engine::RenderEngine::DrawInstanced(&m_instanceGob[2], &m_instanceBuffer[2]);
+		Engine::RenderEngine::DrawInstanced(&m_instanceGob[3], &m_instanceBuffer[3]);
 	}
 
 
@@ -576,6 +597,14 @@ bool EngineDemo::ProcessInput(float /*dt*/)
 		}
 	}
 
+	if (Engine::Keyboard::KeyWasPressed('J'))
+	{
+		for (int i = 0; i < NUM_ATTACHMENTS; ++i)
+		{
+			DetachObj(i + 1); 
+		}
+	}
+
 	if (Engine::Keyboard::KeyWasPressed('X')) { Shutdown(); return false; }
 	return true;
 }
@@ -629,8 +658,9 @@ bool EngineDemo::UglyDemoCode()
 	Engine::CollisionTester::OnlyShowLayer(Engine::CollisionLayer::NUM_LAYERS);
 
 	m_instanceBuffer[0].Initialize(&m_instanceMatrices[0], 16 * sizeof(float), MAX_OBJS, MAX_OBJS * 16, GL_STREAM_DRAW); // todo: ugly code fix 
-	m_instanceBuffer[1].Initialize(&m_instantaneousVelocityArrowMatrices[0], 16 * sizeof(float), MAX_OBJS, MAX_OBJS * 16, GL_STREAM_DRAW); // todo: ugly code fix 
-	m_instanceBuffer[2].Initialize(&m_worldVelocityArrowMatrices[0], 16 * sizeof(float), MAX_OBJS, MAX_OBJS * 16, GL_STREAM_DRAW); // todo: ugly code fix 
+	m_instanceBuffer[1].Initialize(&m_instantaneousVelocityArrowMatrices[0], 16 * sizeof(float), MAX_OBJS, MAX_OBJS * 16, GL_STREAM_DRAW); 
+	m_instanceBuffer[2].Initialize(&m_worldVelocityArrowMatrices[0], 16 * sizeof(float), MAX_OBJS, MAX_OBJS * 16, GL_STREAM_DRAW);
+	m_instanceBuffer[3].Initialize(&m_otherArrows[0], 16 * sizeof(float), MAX_OBJS, MAX_OBJS * 16, GL_STREAM_DRAW);
 
 	Engine::ShapeGenerator::MakeSphere(&m_selectedSphere, Engine::Vec3(1.0f));
 	m_selectedSphere.AddUniformData(Engine::UniformData(GL_FLOAT_MAT4, m_selectedSphere.GetFullTransformPtr(), modelToWorldMatLoc));
@@ -684,6 +714,19 @@ bool EngineDemo::UglyDemoCode()
 	Engine::RenderEngine::AddGraphicalObject(&m_instanceGob[2]);
 	m_instanceGob[2].CalcFullTransform();
 
+	Engine::ShapeGenerator::MakeDebugArrow(&m_instanceGob[3], Engine::Vec3(1.0f, 1.0f, 0.0f), Engine::Vec3(0.0f, 1.0f, 0.0f));
+	m_instanceGob[3].AddUniformData(Engine::UniformData(GL_FLOAT_MAT4, m_instanceGob[3].GetFullTransformPtr(), modelToWorldMatLoc));
+	m_instanceGob[3].AddUniformData(Engine::UniformData(GL_FLOAT_MAT4, &identity, worldToViewMatLoc));
+	m_instanceGob[3].AddUniformData(Engine::UniformData(GL_FLOAT_MAT4, m_perspective.GetPerspectivePtr(), perspectiveMatLoc));
+	m_instanceGob[3].AddUniformData(Engine::UniformData(GL_FLOAT_VEC3, &m_instanceGob[3].GetMatPtr()->m_materialColor, tintColorLoc));
+	m_instanceGob[3].AddUniformData(Engine::UniformData(GL_FLOAT, &m_instanceGob[3].GetMatPtr()->m_specularIntensity, tintIntensityLoc));
+
+	m_instanceGob[3].GetMatPtr()->m_specularIntensity = 0.7f;
+	m_instanceGob[3].GetMatPtr()->m_materialColor = Engine::Vec3(0.0f, 0.0f, 1.0f);
+
+	Engine::RenderEngine::AddGraphicalObject(&m_instanceGob[3]);
+	m_instanceGob[3].CalcFullTransform();
+
 	for (int i = 0; i < MAX_OBJS; ++i)
 	{
 		InitObj(i);
@@ -712,15 +755,9 @@ bool EngineDemo::UglyDemoCode()
 	//Engine::RenderEngine::AddGraphicalObject(&m_plane);
 	Engine::CollisionTester::AddGraphicalObjectToLayer(&m_plane, Engine::CollisionLayer::STATIC_GEOMETRY);
 	m_plane.CalcFullTransform();
-	m_gravity.SetGravity(Engine::Vec3(0.0f, -100.0f, 0.0f));
+	m_gravity.SetGravity(Engine::Vec3(0.0f, -10.0f, 0.0f));
 
-
-	for (int i = 0; i < NUM_ATTACHMENTS; ++i)
-	{
-		m_particleAttachments[i].Attach(m_objPhysics[i + 1].GetParticlePtr(), m_objPhysics[0].GetParticlePtr());
-	}
-
-	m_objPhysics[0].StartSpin(1.0f, Engine::Vec3::PLUS_Z);
+	m_objPhysics[0].StartSpin(0.1f, Engine::Vec3::PLUS_Z);
 	return true;
 }
 
@@ -815,10 +852,10 @@ void EngineDemo::InitObj(int index)
 	m_objs[index].Initialize();
 
 	// give all ze particles drag!
-	Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_particleDrag);
-	if (index < MAX_OBJS && index >= 0)
+	if (index == 0)
 	{
-		//Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_gravity);
+		Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_particleDrag);
+		Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_gravity);
 	}
 
 	AlignObj(index);
@@ -841,24 +878,38 @@ void EngineDemo::AlignObj(int index)
 	m_objPhysics[index].ClearForces();
 	m_objGobs[index].SetScaleMat(Engine::Mat4::Scale(scale));
 	m_objPhysics[index].GetParticlePtr()->ResetRotation();
+	if (index > 0)
+	{
+		m_particleAttachments[index - 1].Attach(m_objPhysics[index].GetParticlePtr(), m_objPhysics[0].GetParticlePtr());\
+		Engine::PhysicsManager::RemoveforceGen(m_objPhysics[index].GetParticlePtr(), &m_gravity);
+		Engine::PhysicsManager::RemoveforceGen(m_objPhysics[index].GetParticlePtr(), &m_particleDrag);
+	}
 
 	m_objPhysics[index].SetRadius(MAGIC_RADIUS_SCALE * scale);
 }
 
-void EngineDemo::RandomizeObj(int index)
+void EngineDemo::DetachObj(int index)
 {
-	float scale = Engine::MathUtility::Rand(MIN_RADIUS, MAX_RADIUS);
-	Engine::Vec3 pos = ORIGIN + Engine::MathUtility::GetRandSphereEdgeVec(Engine::MathUtility::Rand(100.0f, 1000.0f));
-	pos = Engine::Vec3(pos.GetX(), pos.GetY(), ORIGIN.GetZ());
-	m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
-	m_objPhysics[index].SetPosition(pos);
-	m_objPhysics[index].SetVelocity(Engine::MathUtility::Rand(10.0f, 50.0f) * (ORIGIN - pos).Normalize());
-	m_objGobs[index].SetScaleMat(Engine::Mat4::Scale(scale));
-
-	// radius 4/3 pi r cubed, but all have that coefficient so not really needed...
-	m_objPhysics[index].SetMass(MASS_PER_VOLUME * FOUR_THIRDS_PI * scale*scale*scale, false);
-	m_objPhysics[index].SetRadius(MAGIC_RADIUS_SCALE * scale);
+	m_particleAttachments[index - 1].Detach();
+	Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_particleDrag);
+	Engine::PhysicsManager::AddForcGen(m_objPhysics[index].GetParticlePtr(), &m_gravity);
 }
+
+//
+//void EngineDemo::RandomizeObj(int index)
+//{
+//	float scale = Engine::MathUtility::Rand(MIN_RADIUS, MAX_RADIUS);
+//	Engine::Vec3 pos = ORIGIN + Engine::MathUtility::GetRandSphereEdgeVec(Engine::MathUtility::Rand(100.0f, 1000.0f));
+//	pos = Engine::Vec3(pos.GetX(), pos.GetY(), ORIGIN.GetZ());
+//	m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
+//	m_objPhysics[index].SetPosition(pos);
+//	m_objPhysics[index].SetVelocity(Engine::MathUtility::Rand(10.0f, 50.0f) * (ORIGIN - pos).Normalize());
+//	m_objGobs[index].SetScaleMat(Engine::Mat4::Scale(scale));
+//
+//	// radius 4/3 pi r cubed, but all have that coefficient so not really needed...
+//	m_objPhysics[index].SetMass(MASS_PER_VOLUME * FOUR_THIRDS_PI * scale*scale*scale, false);
+//	m_objPhysics[index].SetRadius(MAGIC_RADIUS_SCALE * scale);
+//}
 
 bool EngineDemo::DestroyObjsCallback(Engine::GraphicalObject * pObj, void * pClassInstance)
 {
