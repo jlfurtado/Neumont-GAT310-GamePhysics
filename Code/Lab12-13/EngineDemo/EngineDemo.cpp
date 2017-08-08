@@ -42,6 +42,7 @@
 // EngineDemo.cpp
 // The game
 
+const float OBJ_SCALE = 25.0f;
 const float MAGIC_RADIUS_SCALE = 1.0f; // todo: collider visualization? update const if different model???
 const float FOUR_THIRDS_PI = Engine::MathUtility::PI * 4.0f / 3.0f;
 const float MASS_PER_VOLUME = 0.0001f;
@@ -595,6 +596,8 @@ bool EngineDemo::ProcessInput(float /*dt*/)
 		{
 			AlignObj(i, Engine::Keyboard::KeyIsDown(VK_SHIFT));
 		}
+
+		m_objPhysics[0].SetMass(MAX_OBJS * MASS_PER_VOLUME * FOUR_THIRDS_PI * OBJ_SCALE*OBJ_SCALE*OBJ_SCALE, false);
 	}
 
 	if (Engine::Keyboard::KeyWasPressed('J'))
@@ -603,6 +606,8 @@ bool EngineDemo::ProcessInput(float /*dt*/)
 		{
 			DetachObj(i + 1); 
 		}
+
+		m_objPhysics[0].SetMass(1.0f * MASS_PER_VOLUME * FOUR_THIRDS_PI * OBJ_SCALE*OBJ_SCALE*OBJ_SCALE, false);
 	}
 
 	if (Engine::Keyboard::KeyWasPressed('X')) { Shutdown(); return false; }
@@ -864,20 +869,18 @@ void EngineDemo::InitObj(int index)
 const int OBJ_PER_DIR = (int)sqrtf((float)MAX_OBJS) + 1;
 void EngineDemo::AlignObj(int index, bool randRad)
 {
-	float scale = 25.0f; // todo vary?
-
 	float radius = randRad ? Engine::MathUtility::Rand(100.0f, 200.0f) : 150.0f;
 	float theta = (index / (1.0f * NUM_ATTACHMENTS)) * (2.0f * Engine::MathUtility::PI);
 	Engine::Vec3 start = Engine::Vec3(sinf(theta), cosf(theta), 0.0f) * radius;
 	Engine::Vec3 pos = ORIGIN + (index == 0 ? Engine::Vec3::ZERO : start);
 
-	m_objPhysics[index].SetMass(MASS_PER_VOLUME * FOUR_THIRDS_PI * scale*scale*scale, false);
+	m_objPhysics[index].SetMass(MASS_PER_VOLUME * FOUR_THIRDS_PI * OBJ_SCALE*OBJ_SCALE*OBJ_SCALE, false);
 
 	m_objGobs[index].SetTransMat(Engine::Mat4::Translation(pos));
 	m_objPhysics[index].SetPosition(pos);
 	m_objPhysics[index].SetVelocity(Engine::Vec3(0.0f));
 	m_objPhysics[index].ClearForces();
-	m_objGobs[index].SetScaleMat(Engine::Mat4::Scale(scale));
+	m_objGobs[index].SetScaleMat(Engine::Mat4::Scale(OBJ_SCALE));
 	m_objPhysics[index].GetParticlePtr()->ResetRotation();
 	if (index > 0)
 	{
@@ -886,7 +889,7 @@ void EngineDemo::AlignObj(int index, bool randRad)
 		Engine::PhysicsManager::RemoveforceGen(m_objPhysics[index].GetParticlePtr(), &m_particleDrag);
 	}
 
-	m_objPhysics[index].SetRadius(MAGIC_RADIUS_SCALE * scale);
+	m_objPhysics[index].SetRadius(MAGIC_RADIUS_SCALE * OBJ_SCALE);
 }
 
 void EngineDemo::DetachObj(int index)
