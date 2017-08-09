@@ -57,7 +57,7 @@ const float MAX_DRAG = 1.0f;
 
 namespace {
 	const int TYPES = 4;
-	const int MAX_OBJS = 6; // 7; // 8;
+	const int MAX_OBJS = 10; // 7; // 8;
 	const int NUM_ATTACHMENTS = MAX_OBJS - 1;
 	Engine::Entity m_objs[MAX_OBJS];
 	Engine::SpatialComponent m_objSpatials[MAX_OBJS];
