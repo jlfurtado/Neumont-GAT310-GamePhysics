@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
         myBall.gameObject.name = "PlayerBall";
         myBall.gameObject.SetActive(false);
         myBall.tempText = tempText;
-
         //GameObject[] interactableObjects = GameObject.FindGameObjectsWithTag(Tags.INTERACTABLE);
         //interactables = new Interactable[interactableObjects.Length];
 
@@ -45,15 +44,17 @@ public class PlayerController : MonoBehaviour {
 
     private void HandleClickObj(RaycastHit rco, Ray ray)
     {
-        if (rco.collider.gameObject.tag.Equals(Tags.PLACE_BOX))
+        if (rco.collider.CompareTag(Tags.PLACE_BOX))
         {
             rco.transform.gameObject.SetActive(false);
             myBall.transform.position = rco.point - ray.direction * 1.0f;
             myBall.gameObject.SetActive(true);
             placingSphere = false;
             tempText.text = "Waiting for ball";
+            myBall.PlacePlane = rco.transform.gameObject;
+
         }
-        else if (rco.collider.gameObject.tag.Equals(Tags.INTERACTABLE))
+        else if (rco.collider.CompareTag(Tags.INTERACTABLE))
         {
             Interactable clickedObj = rco.collider.gameObject.GetComponentInParent<Interactable>(); // TODO CHANGE THIS LATER!!!
             clickedObj.Interact();
