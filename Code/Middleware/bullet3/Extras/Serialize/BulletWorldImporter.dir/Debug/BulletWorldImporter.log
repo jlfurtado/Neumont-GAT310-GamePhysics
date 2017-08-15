@@ -1,0 +1,6 @@
+﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/Extras/Serialize/BulletWorldImporter/CMakeLists.txt
+  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/Extras/Serialize/BulletWorldImporter/CMakeFiles/generate.stamp is up-to-date.
+  btBulletWorldImporter.cpp
+  btWorldImporter.cpp
+  Generating Code...
+  BulletWorldImporter.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\lib\Debug\BulletWorldImporter_Debug.lib

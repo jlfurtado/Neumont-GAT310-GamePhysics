@@ -1,0 +1,20 @@
+﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/examples/OpenGLWindow/CMakeLists.txt
+  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/examples/OpenGLWindow/CMakeFiles/generate.stamp is up-to-date.
+  glew.c
+  Win32OpenGLWindow.cpp
+  Win32Window.cpp
+  EGLOpenGLWindow.cpp
+  GLInstancingRenderer.cpp
+  GLPrimitiveRenderer.cpp
+  GLRenderToTexture.cpp
+  LoadShader.cpp
+  OpenSans.cpp
+  SimpleCamera.cpp
+  SimpleOpenGL2App.cpp
+  SimpleOpenGL2Renderer.cpp
+  SimpleOpenGL3App.cpp
+  TwFonts.cpp
+  fontstash.cpp
+  opengl_fontstashcallbacks.cpp
+  Generating Code...
+  OpenGLWindow.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\lib\Debug\OpenGLWindow_Debug.lib

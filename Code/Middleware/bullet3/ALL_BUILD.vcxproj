@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AE69AF6B-8CEB-3AC3-8E2C-585022974A38}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jfurtado\Desktop\bullet3-2.86.1\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/jfurtado/Desktop/bullet3-2.86.1 "-BC:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3" --check-stamp-file "C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/jfurtado/Desktop/bullet3-2.86.1/CMakeLists.txt;C:\Users\jfurtado\Desktop\bullet3-2.86.1\CMakeLists.txt;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeCCompiler.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindPackageMessage.cmake;C:\Users\jfurtado\Desktop\bullet3-2.86.1\BulletConfig.cmake.in;C:\Users\jfurtado\Desktop\bullet3-2.86.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/jfurtado/Desktop/bullet3-2.86.1 "-BC:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3" --check-stamp-file "C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/jfurtado/Desktop/bullet3-2.86.1/CMakeLists.txt;C:\Users\jfurtado\Desktop\bullet3-2.86.1\CMakeLists.txt;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeCCompiler.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindPackageMessage.cmake;C:\Users\jfurtado\Desktop\bullet3-2.86.1\BulletConfig.cmake.in;C:\Users\jfurtado\Desktop\bullet3-2.86.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/jfurtado/Desktop/bullet3-2.86.1 "-BC:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3" --check-stamp-file "C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/jfurtado/Desktop/bullet3-2.86.1/CMakeLists.txt;C:\Users\jfurtado\Desktop\bullet3-2.86.1\CMakeLists.txt;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeCCompiler.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindPackageMessage.cmake;C:\Users\jfurtado\Desktop\bullet3-2.86.1\BulletConfig.cmake.in;C:\Users\jfurtado\Desktop\bullet3-2.86.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/jfurtado/Desktop/bullet3-2.86.1 "-BC:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3" --check-stamp-file "C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/jfurtado/Desktop/bullet3-2.86.1/CMakeLists.txt;C:\Users\jfurtado\Desktop\bullet3-2.86.1\CMakeLists.txt;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeCCompiler.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\3.9.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindOpenGL.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.9\Modules\FindPackageMessage.cmake;C:\Users\jfurtado\Desktop\bullet3-2.86.1\BulletConfig.cmake.in;C:\Users\jfurtado\Desktop\bullet3-2.86.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\ZERO_CHECK.vcxproj">
+      <Project>{3962EC68-D49D-31E8-BD42-0882ECA02D76}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\BasicDemo\AppBasicExampleGui.vcxproj">
+      <Project>{00781BE1-ECDB-3ECF-BD26-A13E50F79472}</Project>
+      <Name>AppBasicExampleGui</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\BasicDemo\App_BasicExample.vcxproj">
+      <Project>{5B101B7F-18E4-3B8A-8818-B34A115AE2D0}</Project>
+      <Name>App_BasicExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\ExampleBrowser\App_ExampleBrowser.vcxproj">
+      <Project>{834904E7-31CD-339E-95ED-5686CC160D97}</Project>
+      <Name>App_ExampleBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\HelloWorld\App_HelloWorld.vcxproj">
+      <Project>{E7A376EB-4887-3B9F-A5AA-00F22AC37BA9}</Project>
+      <Name>App_HelloWorld</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\SharedMemory\App_SharedMemoryPhysics.vcxproj">
+      <Project>{917E6B05-1330-38BC-A360-0C91A52D78F6}</Project>
+      <Name>App_SharedMemoryPhysics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\SharedMemory\App_SharedMemoryPhysics_GUI.vcxproj">
+      <Project>{2B5452CE-6E49-3216-95EE-F78850987384}</Project>
+      <Name>App_SharedMemoryPhysics_GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\SharedMemory\App_SharedMemoryPhysics_VR.vcxproj">
+      <Project>{74BC77C7-0DF7-3730-A35C-D19787229AE9}</Project>
+      <Name>App_SharedMemoryPhysics_VR</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\Bullet3Serialize\Bullet2FileLoader\Bullet2FileLoader.vcxproj">
+      <Project>{23FAD95F-9E4A-3FC6-8260-B0B6ECDA4FAB}</Project>
+      <Name>Bullet2FileLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\Bullet3Collision\Bullet3Collision.vcxproj">
+      <Project>{E58BE84F-2D7A-3105-A12F-0CBEC29CBC75}</Project>
+      <Name>Bullet3Collision</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\Bullet3Common\Bullet3Common.vcxproj">
+      <Project>{9A80F3F0-8FE1-32B0-B173-F69BD45C2DF5}</Project>
+      <Name>Bullet3Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\Bullet3Dynamics\Bullet3Dynamics.vcxproj">
+      <Project>{5B9137E9-1E37-31B8-85D5-F911DE9C616E}</Project>
+      <Name>Bullet3Dynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\Bullet3Geometry\Bullet3Geometry.vcxproj">
+      <Project>{CEEB8D66-EA5C-33D3-A2CE-57F6BCABB719}</Project>
+      <Name>Bullet3Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\Bullet3OpenCL\Bullet3OpenCL_clew.vcxproj">
+      <Project>{FD23B0AA-EF30-3731-B4C1-A9F4005267DC}</Project>
+      <Name>Bullet3OpenCL_clew</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\BulletCollision\BulletCollision.vcxproj">
+      <Project>{ED606AF6-033A-30B2-9673-B3527D6DD57B}</Project>
+      <Name>BulletCollision</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\BulletDynamics\BulletDynamics.vcxproj">
+      <Project>{110FC8BE-1F0E-3FE1-BDF1-848E4B2BD726}</Project>
+      <Name>BulletDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\ExampleBrowser\BulletExampleBrowserLib.vcxproj">
+      <Project>{93781AF7-10F2-3DC4-8BA3-3B36BC3FE77A}</Project>
+      <Name>BulletExampleBrowserLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\Extras\Serialize\BulletFileLoader\BulletFileLoader.vcxproj">
+      <Project>{4358FFD2-5CB1-3CA2-BBCE-499D5909D30D}</Project>
+      <Name>BulletFileLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\BulletInverseDynamics\BulletInverseDynamics.vcxproj">
+      <Project>{B0DA0381-DA13-3DF3-AD10-9487B29EDAD6}</Project>
+      <Name>BulletInverseDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\Extras\InverseDynamics\BulletInverseDynamicsUtils.vcxproj">
+      <Project>{3F45E7B1-0419-3DA5-82C7-530932AAB340}</Project>
+      <Name>BulletInverseDynamicsUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\BulletSoftBody\BulletSoftBody.vcxproj">
+      <Project>{F9EAB7E8-CB68-367D-B205-2C242A815B20}</Project>
+      <Name>BulletSoftBody</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\Extras\Serialize\BulletWorldImporter\BulletWorldImporter.vcxproj">
+      <Project>{B518855C-DBC1-3EF8-A624-B673BFFF6A67}</Project>
+      <Name>BulletWorldImporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\Extras\Serialize\BulletXmlWorldImporter\BulletXmlWorldImporter.vcxproj">
+      <Project>{E1F36BB5-057B-358A-9E2D-F7C922F427D5}</Project>
+      <Name>BulletXmlWorldImporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\ThirdPartyLibs\BussIK\BussIK.vcxproj">
+      <Project>{83077530-3DA2-3393-8BAF-039165D00911}</Project>
+      <Name>BussIK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\Extras\ConvexDecomposition\ConvexDecomposition.vcxproj">
+      <Project>{BE5B8259-1CF2-388E-8B58-90B8155540B1}</Project>
+      <Name>ConvexDecomposition</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\Extras\GIMPACTUtils\GIMPACTUtils.vcxproj">
+      <Project>{813F99A0-803F-3A7F-8F34-D97214A87A6F}</Project>
+      <Name>GIMPACTUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\Extras\HACD\HACD.vcxproj">
+      <Project>{20D594B5-60BB-3A13-9BB7-D846F95C1DD5}</Project>
+      <Name>HACD</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\src\LinearMath\LinearMath.vcxproj">
+      <Project>{0FB8F2A2-1CA3-3DC0-BF00-F9E69D6C87A5}</Project>
+      <Name>LinearMath</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\OpenGLWindow\OpenGLWindow.vcxproj">
+      <Project>{D58DA0F3-CEF0-3288-89AB-D45BDCBF5E52}</Project>
+      <Name>OpenGLWindow</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\test\BulletDynamics\pendulum\Test_BulletDynamics.vcxproj">
+      <Project>{323F04F5-65F8-3899-9810-98E6416146DF}</Project>
+      <Name>Test_BulletDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\test\InverseDynamics\Test_BulletInverseDynamics.vcxproj">
+      <Project>{91C83935-8A5A-3DF6-963B-388521D32F24}</Project>
+      <Name>Test_BulletInverseDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\test\InverseDynamics\Test_BulletInverseDynamicsJacobian.vcxproj">
+      <Project>{E31B6687-9A30-3C1B-A12E-10D5EAF3C256}</Project>
+      <Name>Test_BulletInverseDynamicsJacobian</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\test\InverseDynamics\Test_BulletInverseForwardDynamics.vcxproj">
+      <Project>{D0D9943A-33C3-3491-88A1-4CA2EF767FD3}</Project>
+      <Name>Test_BulletInverseForwardDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\test\collision\Test_Collision.vcxproj">
+      <Project>{FE324EF2-B739-33BE-9D4A-4690F40BAB62}</Project>
+      <Name>Test_Collision</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\test\SharedMemory\Test_PhysicsClientServer.vcxproj">
+      <Project>{568BBAB0-6299-3CFF-9B1D-9E130ADB0303}</Project>
+      <Name>Test_PhysicsClientServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\test\gtest-1.7.0\gtest.vcxproj">
+      <Project>{9C8B4B13-BAEF-3874-80C1-C54160AB7D19}</Project>
+      <Name>gtest</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\ThirdPartyLibs\Gwen\gwen.vcxproj">
+      <Project>{AE2D2E88-1B6C-3DCB-9622-56754D9F84A8}</Project>
+      <Name>gwen</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

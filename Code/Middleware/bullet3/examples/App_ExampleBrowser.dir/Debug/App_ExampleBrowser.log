@@ -1,0 +1,224 @@
+﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/examples/ExampleBrowser/CMakeLists.txt
+  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/examples/ExampleBrowser/CMakeFiles/generate.stamp is up-to-date.
+  main.cpp
+  ExampleEntries.cpp
+  Chain.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\Chain.cpp(133): warning C4316: 'ChainExample': object allocated on the heap may not be aligned 16
+  Bridge.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\Bridge.cpp(146): warning C4316: 'BridgeExample': object allocated on the heap may not be aligned 16
+  RigidBodyFromObj.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\RigidBodyFromObj.cpp(161): warning C4316: 'RigidBodyFromObjExample': object allocated on the heap may not be aligned 16
+  SimpleBox.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\SimpleBox.cpp(114): warning C4316: 'SimpleBoxExample': object allocated on the heap may not be aligned 16
+  MultipleBoxes.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\MultipleBoxes.cpp(116): warning C4316: 'MultipleBoxesExample': object allocated on the heap may not be aligned 16
+  SimpleCloth.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\SimpleCloth.cpp(158): warning C4316: 'SimpleClothExample': object allocated on the heap may not be aligned 16
+  SimpleJoint.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\SimpleJoint.cpp(129): warning C4316: 'SimpleJointExample': object allocated on the heap may not be aligned 16
+  NewtonsCradle.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\NewtonsCradle.cpp(368): warning C4316: 'NewtonsCradleExample': object allocated on the heap may not be aligned 16
+  InclinedPlane.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\InclinedPlane.cpp(371): warning C4316: 'InclinedPlaneExample': object allocated on the heap may not be aligned 16
+  MultiPendulum.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\MultiPendulum.cpp(424): warning C4316: 'MultiPendulumExample': object allocated on the heap may not be aligned 16
+  geometry.cpp
+  model.cpp
+  tgaimage.cpp
+  our_gl.cpp
+  TinyRenderer.cpp
+  TinyRendererVisualShapeConverter.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\SharedMemory\TinyRendererVisualShapeConverter.cpp(122): warning C4316: 'TinyRendererVisualShapeConverterInternalData': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\SharedMemory\TinyRendererVisualShapeConverter.cpp(613): warning C4316: 'TinyRenderObjectData': object allocated on the heap may not be aligned 16
+  IKTrajectoryHelper.cpp
+  PhysicsServer.cpp
+  Generating Code...
+  Compiling...
+  PhysicsClientSharedMemory.cpp
+  PhysicsClientSharedMemory_C_API.cpp
+  PhysicsClient.cpp
+  PhysicsClientC_API.cpp
+  PhysicsServerExample.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\SharedMemory\PhysicsServerExample.cpp(1949): warning C4316: 'MultiThreadedOpenGLGuiHelper': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\SharedMemory\PhysicsServerExample.cpp(1953): warning C4316: 'PhysicsServerExample': object allocated on the heap may not be aligned 16
+  PhysicsClientExample.cpp
+  PosixSharedMemory.cpp
+  Win32SharedMemory.cpp
+  InProcessMemory.cpp
+  PhysicsServerSharedMemory.cpp
+  PhysicsDirect.cpp
+  PhysicsDirectC_API.cpp
+  SharedMemoryInProcessPhysicsC_API.cpp
+  PhysicsLoopBack.cpp
+  PhysicsLoopBackC_API.cpp
+  PhysicsServerCommandProcessor.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\SharedMemory\PhysicsServerCommandProcessor.cpp(882): warning C4316: 'PhysicsServerCommandProcessorInternalData': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\SharedMemory\PhysicsServerCommandProcessor.cpp(2440): warning C4316: 'btMultiBodyJointFeedback': object allocated on the heap may not be aligned 16
+  BasicExample.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\BasicDemo\BasicExample.cpp(143): warning C4316: 'BasicExample': object allocated on the heap may not be aligned 16
+  InverseDynamicsExample.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\InverseDynamics\InverseDynamicsExample.cpp(365): warning C4316: 'InverseDynamicsExample': object allocated on the heap may not be aligned 16
+  InverseKinematicsExample.cpp
+  ForkLiftDemo.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ForkLift\ForkLiftDemo.cpp(1213): warning C4316: 'ForkLiftDemo': object allocated on the heap may not be aligned 16
+  Generating Code...
+  Compiling...
+  MultiThreadedDemo.cpp
+  CommonRigidBodyMTBase.cpp
+  Tutorial.cpp
+  Dof6ConstraintTutorial.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Tutorial\Dof6ConstraintTutorial.cpp(533): warning C4316: 'Dof6ConstraintTutorial': object allocated on the heap may not be aligned 16
+  NN3DWalkers.cpp
+c:\users\jfurtado\desktop\bullet3-2.86.1\examples\evolution\NN3DWalkersTimeWarpBase.h(792): warning C4018: '>': signed/unsigned mismatch
+c:\users\jfurtado\desktop\bullet3-2.86.1\examples\evolution\NN3DWalkersTimeWarpBase.h(809): warning C4018: '>': signed/unsigned mismatch
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Evolution\NN3DWalkers.cpp(705): warning C4316: 'NNWalker': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Evolution\NN3DWalkers.cpp(790): warning C4316: 'NN3DWalkersExample': object allocated on the heap may not be aligned 16
+  NewtonsRopeCradle.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ExtendedTutorials\NewtonsRopeCradle.cpp(374): warning C4316: 'NewtonsRopeCradleExample': object allocated on the heap may not be aligned 16
+  CollisionSdkC_Api.cpp
+  CollisionTutorialBullet2.cpp
+  Bullet2CollisionSdk.cpp
+  RealTimeBullet3CollisionSdk.cpp
+  GyroscopicSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\GyroscopicDemo\GyroscopicSetup.cpp(137): warning C4316: 'GyroscopicSetup': object allocated on the heap may not be aligned 16
+  Planar2D.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Planar2D\Planar2D.cpp(337): warning C4316: 'Planar2D': object allocated on the heap may not be aligned 16
+  RollingFrictionDemo.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\RollingFrictionDemo\RollingFrictionDemo.cpp(292): warning C4316: 'RollingFrictionDemo': object allocated on the heap may not be aligned 16
+  FractureDemo.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\FractureDemo\FractureDemo.cpp(408): warning C4316: 'FractureDemo': object allocated on the heap may not be aligned 16
+  btFractureBody.cpp
+  btFractureDynamicsWorld.cpp
+  MotorDemo.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\DynamicControlDemo\MotorDemo.cpp(449): warning C4316: 'MotorDemo': object allocated on the heap may not be aligned 16
+  MultiThreadingExample.cpp
+  b3PosixThreadSupport.cpp
+  b3Win32ThreadSupport.cpp
+  Generating Code...
+  Compiling...
+  b3ThreadSupportInterface.cpp
+  TinyRendererSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\RenderingExamples\TinyRendererSetup.cpp(151): warning C4316: 'TinyRendererSetupInternalData': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\RenderingExamples\TinyRendererSetup.cpp(195): warning C4316: 'TinyRenderObjectData': object allocated on the heap may not be aligned 16
+  TimeSeriesCanvas.cpp
+  TimeSeriesFontData.cpp
+  DynamicTexturedCubeDemo.cpp
+  TinyVRGui.cpp
+  GripperGraspExample.cpp
+  b3RobotSimAPI.cpp
+  R2D2GraspExample.cpp
+  KukaGraspExample.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\RoboticsLearning\KukaGraspExample.cpp(319): warning C4316: 'KukaGraspExample': object allocated on the heap may not be aligned 16
+  CoordinateSystemDemo.cpp
+  RaytracerSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\RenderingExamples\RaytracerSetup.cpp(125): warning C4316: 'RaytracerInternalData': object allocated on the heap may not be aligned 16
+  RenderInstancingDemo.cpp
+  TimeSeriesExample.cpp
+  BenchmarkDemo.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Benchmarks\BenchmarkDemo.cpp(1317): warning C4316: 'BenchmarkDemo': object allocated on the heap may not be aligned 16
+  RaytestDemo.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Raycast\RaytestDemo.cpp(331): warning C4316: 'RaytestDemo': object allocated on the heap may not be aligned 16
+  SerializeSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportBullet\SerializeSetup.cpp(113): warning C4316: 'SerializeSetup': object allocated on the heap may not be aligned 16
+  b3ImportMeshUtility.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportMeshUtility\b3ImportMeshUtility.cpp(35): warning C4018: '<': signed/unsigned mismatch
+  btWorldImporter.cpp
+  btBulletWorldImporter.cpp
+  Generating Code...
+  Compiling...
+  bChunk.cpp
+  bFile.cpp
+  bDNA.cpp
+  btBulletFile.cpp
+  BulletMJCFImporter.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.cpp(270): warning C4316: 'UrdfModel': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.cpp(280): warning C4316: 'UrdfModel': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.cpp(283): warning C4316: 'UrdfLink': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.cpp(438): warning C4316: 'UrdfJoint': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.cpp(793): warning C4316: 'UrdfLink': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportMJCFDemo\BulletMJCFImporter.cpp(975): warning C4316: 'UrdfJoint': object allocated on the heap may not be aligned 16
+  ImportMJCFSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportMJCFDemo\ImportMJCFSetup.cpp(369): warning C4316: 'ImportMJCFSetup': object allocated on the heap may not be aligned 16
+  BspConverter.cpp
+  BspLoader.cpp
+  ImportBspExample.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportBsp\ImportBspExample.cpp(290): warning C4316: 'BspDemo': object allocated on the heap may not be aligned 16
+  ImportColladaSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportColladaDemo\ImportColladaSetup.cpp(212): warning C4316: 'ImportColladaSetup': object allocated on the heap may not be aligned 16
+  LoadMeshFromCollada.cpp
+  ImportObjExample.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportObjDemo\ImportObjExample.cpp(115): warning C4316: 'ImportObjSetup': object allocated on the heap may not be aligned 16
+  LoadMeshFromObj.cpp
+  Wavefront2GLInstanceGraphicsShape.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportObjDemo\Wavefront2GLInstanceGraphicsShape.cpp(52): warning C4018: '<': signed/unsigned mismatch
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportObjDemo\Wavefront2GLInstanceGraphicsShape.cpp(79): warning C4018: '<': signed/unsigned mismatch
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportObjDemo\Wavefront2GLInstanceGraphicsShape.cpp(104): warning C4018: '<': signed/unsigned mismatch
+  ImportSTLSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportSTLDemo\ImportSTLSetup.cpp(102): warning C4316: 'ImportSTLSetup': object allocated on the heap may not be aligned 16
+  ImportSDFSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportSDFDemo\ImportSDFSetup.cpp(338): warning C4316: 'ImportSDFSetup': object allocated on the heap may not be aligned 16
+  ImportURDFSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\ImportURDFSetup.cpp(408): warning C4316: 'ImportUrdfSetup': object allocated on the heap may not be aligned 16
+  URDF2Bullet.cpp
+  MyMultiBodyCreator.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\MyMultiBodyCreator.cpp(65): warning C4316: 'GenericConstraintUserInfo': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\MyMultiBodyCreator.cpp(148): warning C4316: 'GenericConstraintUserInfo': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\MyMultiBodyCreator.cpp(172): warning C4316: 'GenericConstraintUserInfo': object allocated on the heap may not be aligned 16
+  UrdfParser.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\UrdfParser.cpp(578): warning C4316: 'UrdfMaterial': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\UrdfParser.cpp(612): warning C4316: 'UrdfMaterial': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\UrdfParser.cpp(1361): warning C4316: 'UrdfMaterial': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\UrdfParser.cpp(1384): warning C4316: 'UrdfLink': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\UrdfParser.cpp(1432): warning C4316: 'UrdfJoint': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\UrdfParser.cpp(1520): warning C4316: 'UrdfModel': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\UrdfParser.cpp(1556): warning C4316: 'UrdfMaterial': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\UrdfParser.cpp(1579): warning C4316: 'UrdfLink': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Importers\ImportURDFDemo\UrdfParser.cpp(1627): warning C4316: 'UrdfJoint': object allocated on the heap may not be aligned 16
+  Generating Code...
+  Compiling...
+  RobotLoggingUtil.cpp
+  urdfStringSplit.cpp
+  BulletUrdfImporter.cpp
+  VoronoiFractureDemo.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\VoronoiFracture\VoronoiFractureDemo.cpp(829): warning C4316: 'VoronoiFractureDemo': object allocated on the heap may not be aligned 16
+  btConvexConvexMprAlgorithm.cpp
+  Hinge2Vehicle.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Vehicles\Hinge2Vehicle.cpp(1177): warning C4316: 'Hinge2Vehicle': object allocated on the heap may not be aligned 16
+  Pendulum.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\MultiBody\Pendulum.cpp(225): warning C4316: 'Pendulum': object allocated on the heap may not be aligned 16
+  MultiBodySoftContact.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\MultiBody\MultiBodySoftContact.cpp(172): warning C4316: 'MultiBodySoftContact': object allocated on the heap may not be aligned 16
+  TestJointTorqueSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\MultiBody\TestJointTorqueSetup.cpp(221): warning C4316: 'btMultiBodyJointFeedback': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\MultiBody\TestJointTorqueSetup.cpp(433): warning C4316: 'TestJointTorqueSetup': object allocated on the heap may not be aligned 16
+  InvertedPendulumPDControl.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\MultiBody\InvertedPendulumPDControl.cpp(363): warning C4316: 'btMultiBodyJointFeedback': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\MultiBody\InvertedPendulumPDControl.cpp(464): warning C4316: 'InvertedPendulumPDControl': object allocated on the heap may not be aligned 16
+  MultiBodyConstraintFeedback.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\MultiBody\MultiBodyConstraintFeedback.cpp(217): warning C4316: 'btMultiBodyJointFeedback': object allocated on the heap may not be aligned 16
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\MultiBody\MultiBodyConstraintFeedback.cpp(430): warning C4316: 'MultiBodyConstraintFeedbackSetup': object allocated on the heap may not be aligned 16
+  MultiDofDemo.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\MultiBody\MultiDofDemo.cpp(448): warning C4316: 'MultiDofDemo': object allocated on the heap may not be aligned 16
+  RigidBodySoftContact.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\RigidBody\RigidBodySoftContact.cpp(188): warning C4316: 'RigidBodySoftContact': object allocated on the heap may not be aligned 16
+  TestHingeTorque.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Constraints\TestHingeTorque.cpp(240): warning C4316: 'TestHingeTorque': object allocated on the heap may not be aligned 16
+  ConstraintDemo.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Constraints\ConstraintDemo.cpp(887): warning C4316: 'AllConstraintDemo': object allocated on the heap may not be aligned 16
+  Dof6Spring2Setup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Constraints\Dof6Spring2Setup.cpp(500): warning C4316: 'Dof6Spring2Setup': object allocated on the heap may not be aligned 16
+  ConstraintPhysicsSetup.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\Constraints\ConstraintPhysicsSetup.cpp(160): warning C4316: 'ConstraintPhysicsSetup': object allocated on the heap may not be aligned 16
+  stb_image.cpp
+  tiny_obj_loader.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\ThirdPartyLibs\Wavefront\tiny_obj_loader.cpp(214): warning C4018: '<': signed/unsigned mismatch
+  tinystr.cpp
+  Generating Code...
+  Compiling...
+  tinyxml.cpp
+  tinyxmlerror.cpp
+  tinyxmlparser.cpp
+  InProcessExampleBrowser.cpp
+  Generating Code...
+  App_ExampleBrowser.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\ExampleBrowser\Debug\App_ExampleBrowser.exe
+  App_ExampleBrowser.vcxproj -> C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/examples/ExampleBrowser/Debug/App_ExampleBrowser.pdb (Full PDB)

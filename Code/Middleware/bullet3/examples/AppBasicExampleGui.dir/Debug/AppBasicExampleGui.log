@@ -1,0 +1,12 @@
+﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/examples/BasicDemo/CMakeLists.txt
+  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/examples/BasicDemo/CMakeFiles/generate.stamp is up-to-date.
+  BasicExample.cpp
+C:\Users\jfurtado\Desktop\bullet3-2.86.1\examples\BasicDemo\BasicExample.cpp(143): warning C4316: 'BasicExample': object allocated on the heap may not be aligned 16
+  main_opengl_single_example.cpp
+  OpenGLGuiHelper.cpp
+  GL_ShapeDrawer.cpp
+  CollisionShape2TriangleMesh.cpp
+  b3Clock.cpp
+  Generating Code...
+  AppBasicExampleGui.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\BasicDemo\Debug\AppBasicExampleGui.exe
+  AppBasicExampleGui.vcxproj -> C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/examples/BasicDemo/Debug/AppBasicExampleGui.pdb (Full PDB)

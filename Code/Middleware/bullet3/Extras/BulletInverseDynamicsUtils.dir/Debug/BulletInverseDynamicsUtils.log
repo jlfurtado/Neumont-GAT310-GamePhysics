@@ -1,0 +1,16 @@
+﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/Extras/InverseDynamics/CMakeLists.txt
+  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/Extras/InverseDynamics/CMakeFiles/generate.stamp is up-to-date.
+  CloneTreeCreator.cpp
+  CoilCreator.cpp
+  MultiBodyTreeCreator.cpp
+  btMultiBodyTreeCreator.cpp
+  DillCreator.cpp
+  MultiBodyTreeDebugGraph.cpp
+  invdyn_bullet_comparison.cpp
+  IDRandomUtil.cpp
+  RandomTreeCreator.cpp
+  SimpleTreeCreator.cpp
+  MultiBodyNameMap.cpp
+  User2InternalIndex.cpp
+  Generating Code...
+  BulletInverseDynamicsUtils.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\lib\Debug\BulletInverseDynamicsUtils_Debug.lib
