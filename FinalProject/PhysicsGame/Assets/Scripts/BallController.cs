@@ -5,17 +5,18 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BallController : MonoBehaviour {
-    public Text tempText;
     public GameObject PlacePlane;
     public float SlowThreshold;
     public float ThresholdTime;
     private Rigidbody myRigidbody;
     private float stopAccumulator = 0.0f;
     private bool rigidEnabled = true;
+    private SceneMover sceneMoverRef = null;
 
     void Awake()
     {
         myRigidbody = GetComponent<Rigidbody>();
+        sceneMoverRef = GameObject.FindGameObjectWithTag(Tags.SCENE_MOVER).GetComponent<SceneMover>();
     }
 
     void Update()
@@ -27,7 +28,6 @@ public class BallController : MonoBehaviour {
             {
                 // TODO PLAY WITH MAGIC VALUES OR... If this condition && not getting closer to goal :)
                 // maybe players will like it because it favors them
-                tempText.text = "Ball is Stuck!";
                 Reset();
             }
         }
@@ -41,12 +41,11 @@ public class BallController : MonoBehaviour {
     {
         if (other.CompareTag(Tags.GOAL))
         {
-            tempText.text = "You win!";
+            sceneMoverRef.MoveToVictory();
             Stop();
         }
         else if (other.CompareTag(Tags.LETHAL))
         {
-            tempText.text = "You Lose!";
             Reset();
         }
     }

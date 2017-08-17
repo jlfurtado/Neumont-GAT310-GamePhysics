@@ -5,20 +5,21 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     public GameObject BallPrefab;
-    public Text tempText;
     private BallController myBall;
+    
     private const int LEFT_MOUSE = 0;
-    private bool placingSphere;
+    //private bool placingSphere;
     //private Interactable[] interactables = null;
 
 	void Awake()
     {
-        placingSphere = true;
-        tempText.text = "PlacingBall";
+        //placingSphere = true;
+
         myBall = Instantiate(BallPrefab).GetComponent<BallController>();
         myBall.gameObject.name = "PlayerBall";
         myBall.gameObject.SetActive(false);
-        myBall.tempText = tempText;
+
+        // TODO: Interact with all objs?
         //GameObject[] interactableObjects = GameObject.FindGameObjectsWithTag(Tags.INTERACTABLE);
         //interactables = new Interactable[interactableObjects.Length];
 
@@ -49,8 +50,7 @@ public class PlayerController : MonoBehaviour {
             rco.transform.gameObject.SetActive(false);
             myBall.transform.position = rco.point - ray.direction * 1.0f;
             myBall.gameObject.SetActive(true);
-            placingSphere = false;
-            tempText.text = "Waiting for ball";
+            //placingSphere = false;
             myBall.PlacePlane = rco.transform.gameObject;
 
         }

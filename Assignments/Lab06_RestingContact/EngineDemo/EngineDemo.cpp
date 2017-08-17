@@ -828,7 +828,7 @@ void EngineDemo::InitObj(int index)
 const int OBJ_PER_DIR = (int)sqrtf((float)MAX_OBJS) + 1;
 void EngineDemo::AlignObj(int index)
 {
-	float scale = index < MAX_OBJS - 1 ? 15.0f : 100.0f;
+	float scale = index < MAX_OBJS - 1 ? Engine::MathUtility::Rand(10.0f, 20.0f) : 100.0f;
 	//if (index == 0) { scale = 5.0f; }
 	Engine::Vec3 start = (Engine::Vec3(0.0f, 50.0f, 0.0f) * (float)(index - (MAX_OBJS / 2)));
 	Engine::Vec3 pos = ORIGIN + (index == 0 ? Engine::Vec3(150.0f, 0.0f, 0.0f) : start);
