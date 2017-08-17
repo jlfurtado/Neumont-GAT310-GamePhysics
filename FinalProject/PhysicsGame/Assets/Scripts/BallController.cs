@@ -19,6 +19,11 @@ public class BallController : MonoBehaviour {
         sceneMoverRef = GameObject.FindGameObjectWithTag(Tags.SCENE_MOVER).GetComponent<SceneMover>();
     }
 
+    public void StopMoving()
+    {
+        myRigidbody.velocity = Vector3.zero;
+    }
+
     void Update()
     {
         if (rigidEnabled && myRigidbody.velocity.magnitude < SlowThreshold)
@@ -71,7 +76,7 @@ public class BallController : MonoBehaviour {
         rigidEnabled = false;
     }
 
-    private void Reset()
+    public void Reset()
     {
         stopAccumulator = 0.0f;
         PlacePlane.SetActive(true);

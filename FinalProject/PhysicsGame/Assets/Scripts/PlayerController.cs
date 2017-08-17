@@ -48,10 +48,11 @@ public class PlayerController : MonoBehaviour {
         if (rco.collider.CompareTag(Tags.PLACE_BOX))
         {
             rco.transform.gameObject.SetActive(false);
-            myBall.transform.position = rco.point - ray.direction * 1.0f;
+            myBall.transform.position = rco.point + rco.normal * 1.0f;
             myBall.gameObject.SetActive(true);
             //placingSphere = false;
             myBall.PlacePlane = rco.transform.gameObject;
+            myBall.StopMoving();
 
         }
         else if (rco.collider.CompareTag(Tags.INTERACTABLE))
@@ -59,5 +60,11 @@ public class PlayerController : MonoBehaviour {
             Interactable clickedObj = rco.collider.gameObject.GetComponentInParent<Interactable>(); // TODO CHANGE THIS LATER!!!
             clickedObj.Interact();
         }
+    }
+
+    public void RestartLevel()
+    {
+        // todo other reset stuff here
+        myBall.Reset();
     }
 }
