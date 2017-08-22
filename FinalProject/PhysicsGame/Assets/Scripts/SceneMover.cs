@@ -46,6 +46,23 @@ public class SceneMover : MonoBehaviour {
         SceneManager.LoadScene(Scenes.LEVEL_TWO);
     }
 
+    public void MoveToLevelThree()
+    {
+        DontKeepTitleMusic();
+        SceneManager.LoadScene(Scenes.LEVEL_THREE);
+    }
+
+    public void MoveToLevelFour()
+    {
+        DontKeepTitleMusic();
+        SceneManager.LoadScene(Scenes.LEVEL_FOUR);
+    }
+
+    public void MoveToLevelFive()
+    {
+        DontKeepTitleMusic();
+        SceneManager.LoadScene(Scenes.LEVEL_FIVE);
+    }
     private void KeepTitleMusic()
     {
         GameObject titleMusic = GameObject.FindGameObjectWithTag(Tags.TITLE_MUSIC);
