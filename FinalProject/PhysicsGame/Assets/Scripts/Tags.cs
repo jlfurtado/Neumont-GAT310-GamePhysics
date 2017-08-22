@@ -10,4 +10,5 @@ public static class Tags
     public const string LETHAL = "Lethal";
     public const string SCENE_MOVER = "SceneMover";
     public const string TITLE_MUSIC = "TitleMusic";
+    public const string PLAYER_BALL = "PlayerBall";
 }

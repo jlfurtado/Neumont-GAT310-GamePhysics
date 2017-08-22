@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Interactable : MonoBehaviour {
     protected Rigidbody myRigidBody = null;
 
@@ -12,7 +11,7 @@ public class Interactable : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	protected virtual void Update () {
+	protected virtual void FixedUpdate () {
 	    // DO NOTHING FOR NOW	
 	}
 
