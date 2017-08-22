@@ -7,6 +7,8 @@ public static class Scenes
     public const string OPTIONS = "OptionsScene";
     public const string TITLE = "TitleScene";
     public const string LEVEL_ONE = "LevelOneScene";
+    public const string LEVEL_TWO = "LevelTwoScene";
+    public const string LEVEL_SELECT = "LevelSelectScene";
     public const string VICTORY = "VictoryScene";
     public const string HOW_TO_PLAY = "HowToPlayScene";
 }

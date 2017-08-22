@@ -28,10 +28,22 @@ public class SceneMover : MonoBehaviour {
         SceneManager.LoadScene(Scenes.HOW_TO_PLAY);
     }
 
+    public void MoveToLevelSelect()
+    {
+        KeepTitleMusic();
+        SceneManager.LoadScene(Scenes.LEVEL_SELECT);
+    }
+
     public void MoveToLevelOne()
     {
         DontKeepTitleMusic();
         SceneManager.LoadScene(Scenes.LEVEL_ONE);
+    }
+
+    public void MoveToLevelTwo()
+    {
+        DontKeepTitleMusic();
+        SceneManager.LoadScene(Scenes.LEVEL_TWO);
     }
 
     private void KeepTitleMusic()
