@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour {
     protected Rigidbody myRigidBody = null;
+    protected BallController ballRef;
 
     protected virtual void Awake()
     {
+        ballRef = GameObject.FindGameObjectWithTag(Tags.PLAYER_BALL).GetComponent<BallController>();
         myRigidBody = GetComponent<Rigidbody>();
     }
 	

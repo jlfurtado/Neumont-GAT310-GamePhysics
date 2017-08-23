@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
-    public GameObject BallPrefab;
-    private BallController myBall;
+    public BallController Ball;
     
     private const int LEFT_MOUSE = 0;
     //private bool placingSphere;
@@ -15,9 +14,7 @@ public class PlayerController : MonoBehaviour {
     {
         //placingSphere = true;
 
-        myBall = Instantiate(BallPrefab).GetComponent<BallController>();
-        myBall.gameObject.name = "PlayerBall";
-        myBall.gameObject.SetActive(false);
+        Ball.gameObject.name = "PlayerBall";
 
         // TODO: Interact with all objs?
         //GameObject[] interactableObjects = GameObject.FindGameObjectsWithTag(Tags.INTERACTABLE);
@@ -48,11 +45,11 @@ public class PlayerController : MonoBehaviour {
         if (rco.collider.CompareTag(Tags.PLACE_BOX))
         {
             rco.transform.gameObject.SetActive(false);
-            myBall.transform.position = rco.point + rco.normal * 1.0f;
-            myBall.gameObject.SetActive(true);
+            Ball.transform.position = rco.point + rco.normal * 1.0f;
+            Ball.gameObject.SetActive(true);
             //placingSphere = false;
-            myBall.PlacePlane = rco.transform.gameObject;
-            myBall.StopMoving();
+            Ball.PlacePlane = rco.transform.gameObject;
+            Ball.StopMoving();
 
         }
         else if (rco.collider.CompareTag(Tags.INTERACTABLE))
@@ -65,6 +62,6 @@ public class PlayerController : MonoBehaviour {
     public void RestartLevel()
     {
         // todo other reset stuff here
-        myBall.Reset();
+        Ball.Reset();
     }
 }

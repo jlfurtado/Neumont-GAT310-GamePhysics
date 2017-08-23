@@ -6,17 +6,28 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class BallController : MonoBehaviour {
     public GameObject PlacePlane;
+    public Color FadeToColor;
     public float SlowThreshold;
     public float ThresholdTime;
     private Rigidbody myRigidbody;
     private float stopAccumulator = 0.0f;
     private bool rigidEnabled = true;
     private SceneMover sceneMoverRef = null;
+    private Renderer myRenderer;
+    private Color baseColor;
 
     void Awake()
     {
+        myRenderer = GetComponent<Renderer>();
+        baseColor = myRenderer.material.color;
+
         myRigidbody = GetComponent<Rigidbody>();
         sceneMoverRef = GameObject.FindGameObjectWithTag(Tags.SCENE_MOVER).GetComponent<SceneMover>();
+    }
+
+    void Start()
+    {
+        gameObject.SetActive(false);
     }
 
     public void StopMoving()
@@ -29,6 +40,8 @@ public class BallController : MonoBehaviour {
         if (rigidEnabled && myRigidbody.velocity.magnitude < SlowThreshold)
         {
             stopAccumulator += Time.deltaTime;
+            myRenderer.material.color = Color.Lerp(baseColor, FadeToColor, (stopAccumulator / ThresholdTime));
+
             if (stopAccumulator > ThresholdTime)
             {
                 // TODO PLAY WITH MAGIC VALUES OR... If this condition && not getting closer to goal :)
