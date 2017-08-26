@@ -79,10 +79,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BallController.cs" />
+    <Compile Include="Assets\Scripts\BeatenColor.cs" />
     <Compile Include="Assets\Scripts\BombMech.cs" />
+    <Compile Include="Assets\Scripts\DataHelper.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\Scripts\LoadHowYouDidText.cs" />
     <Compile Include="Assets\Scripts\MyHelperFuncs.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\PortalController.cs" />
+    <Compile Include="Assets\Scripts\PortalEntrance.cs" />
+    <Compile Include="Assets\Scripts\PortalExit.cs" />
     <Compile Include="Assets\Scripts\SceneMover.cs" />
     <Compile Include="Assets\Scripts\Scenes.cs" />
     <Compile Include="Assets\Scripts\SpinnerController.cs" />

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class Tags
 {
+    public const string TIME_TEXT = "TimeText";
     public const string INTERACTABLE  = "Interactable";
     public const string PLACE_BOX = "PlaceBox";
     public const string GOAL = "Goal";

@@ -36,33 +36,64 @@ public class SceneMover : MonoBehaviour {
 
     public void MoveToLevelOne()
     {
+        DataHelper.CurrentLevel = DataHelper.LEVEL_ONE_DATA;
         DontKeepTitleMusic();
         SceneManager.LoadScene(Scenes.LEVEL_ONE);
     }
 
     public void MoveToLevelTwo()
     {
+        DataHelper.CurrentLevel = DataHelper.LEVEL_TWO_DATA;
         DontKeepTitleMusic();
         SceneManager.LoadScene(Scenes.LEVEL_TWO);
     }
 
     public void MoveToLevelThree()
     {
+        DataHelper.CurrentLevel = DataHelper.LEVEL_THREE_DATA;
         DontKeepTitleMusic();
         SceneManager.LoadScene(Scenes.LEVEL_THREE);
     }
 
     public void MoveToLevelFour()
     {
+        DataHelper.CurrentLevel = DataHelper.LEVEL_FOUR_DATA;
         DontKeepTitleMusic();
         SceneManager.LoadScene(Scenes.LEVEL_FOUR);
     }
 
     public void MoveToLevelFive()
     {
+        DataHelper.CurrentLevel = DataHelper.LEVEL_FIVE_DATA;
         DontKeepTitleMusic();
         SceneManager.LoadScene(Scenes.LEVEL_FIVE);
     }
+
+    public void MoveToLevelSix()
+    {
+        DataHelper.CurrentLevel = DataHelper.LEVEL_SIX_DATA;
+        DontKeepTitleMusic();
+        SceneManager.LoadScene(Scenes.LEVEL_SIX);
+    }
+    public void MoveToLevelSeven()
+    {
+        DataHelper.CurrentLevel = DataHelper.LEVEL_SEVEN_DATA;
+        DontKeepTitleMusic();
+        SceneManager.LoadScene(Scenes.LEVEL_SEVEN);
+    }
+
+    public void MoveToLevelEight()
+    {
+        DataHelper.CurrentLevel = DataHelper.LEVEL_EIGHT_DATA;
+        DontKeepTitleMusic();
+        SceneManager.LoadScene(Scenes.LEVEL_EIGHT);
+    }
+
+    public void ResetData()
+    {
+        DataHelper.ResetLevelData();
+    }
+
     private void KeepTitleMusic()
     {
         GameObject titleMusic = GameObject.FindGameObjectWithTag(Tags.TITLE_MUSIC);

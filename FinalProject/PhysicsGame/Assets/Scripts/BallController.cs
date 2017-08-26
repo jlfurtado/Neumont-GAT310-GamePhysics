@@ -15,18 +15,25 @@ public class BallController : MonoBehaviour {
     private SceneMover sceneMoverRef = null;
     private Renderer myRenderer;
     private Color baseColor;
+    private float victoryTime = 0.0f;
+    private Text timeText;
+    private const string BAST_TIME = "Time: ";
 
     void Awake()
     {
+        timeText = GameObject.FindGameObjectWithTag(Tags.TIME_TEXT).GetComponent<Text>();
         myRenderer = GetComponent<Renderer>();
         baseColor = myRenderer.material.color;
 
         myRigidbody = GetComponent<Rigidbody>();
         sceneMoverRef = GameObject.FindGameObjectWithTag(Tags.SCENE_MOVER).GetComponent<SceneMover>();
+
+        SetTimeText();
     }
 
     void Start()
     {
+        StopMoving();
         gameObject.SetActive(false);
     }
 
@@ -37,6 +44,9 @@ public class BallController : MonoBehaviour {
 
     void Update()
     {
+        victoryTime += Time.deltaTime;
+        SetTimeText();
+
         if (rigidEnabled && myRigidbody.velocity.magnitude < SlowThreshold)
         {
             stopAccumulator += Time.deltaTime;
@@ -51,6 +61,7 @@ public class BallController : MonoBehaviour {
         }
         else
         {
+            myRenderer.material.color = baseColor;
             stopAccumulator = 0.0f;
         }
     }
@@ -59,6 +70,10 @@ public class BallController : MonoBehaviour {
     {
         if (other.CompareTag(Tags.GOAL))
         {
+            DataHelper.DidBeatBest = DataHelper.GetCurrentLevelWon() == false || victoryTime < DataHelper.GetCurrentLevelTime();
+            if (DataHelper.DidBeatBest) { DataHelper.SetCurrentLevelData(true, victoryTime); }
+            DataHelper.LastTime = victoryTime;
+
             sceneMoverRef.MoveToVictory();
             Stop();
         }
@@ -75,6 +90,7 @@ public class BallController : MonoBehaviour {
 
     private void EnableRigid()
     {
+        StopMoving();
         myRigidbody.isKinematic = false;
         myRigidbody.detectCollisions = true;
         myRigidbody.useGravity = true;
@@ -83,6 +99,7 @@ public class BallController : MonoBehaviour {
 
     private void DisableRigid()
     {
+        StopMoving();
         myRigidbody.isKinematic = true;
         myRigidbody.detectCollisions = false;
         myRigidbody.useGravity = false;
@@ -92,7 +109,20 @@ public class BallController : MonoBehaviour {
     public void Reset()
     {
         stopAccumulator = 0.0f;
+        victoryTime = 0.0f;
+        SetTimeText();
+        StopMoving();
         PlacePlane.SetActive(true);
         gameObject.SetActive(false);
+    }
+
+    private void SetTimeText()
+    {
+        timeText.text = string.Concat(BAST_TIME, victoryTime.ToString(DataHelper.FORMAT));
+    }
+
+    public void MoveTo(Vector3 teleportToPos)
+    {
+        myRigidbody.position = teleportToPos;
     }
 }
