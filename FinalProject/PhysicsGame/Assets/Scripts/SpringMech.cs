@@ -47,7 +47,7 @@ public class SpringMech : Interactable {
 
         Vector3 toBlockTwo = Block2.transform.position - Block1.transform.position;
         Spring.transform.position = (Block1.transform.position + Block2.transform.position) / 2.0f;
-        Spring.transform.rotation = Quaternion.LookRotation(Vector3.up, toBlockTwo.normalized);
+        Spring.transform.rotation = Quaternion.LookRotation(Vector3.Cross(toBlockTwo.normalized, Vector3.up), toBlockTwo.normalized);
         Spring.transform.localScale = new Vector3(Spring.transform.localScale.x, ((toBlockTwo.magnitude - 1.0f) * 0.49f), Spring.transform.localScale.z);
     }
 
