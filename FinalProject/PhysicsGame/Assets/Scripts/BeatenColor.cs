@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class BeatenColor : MonoBehaviour {
     public ColorBlock BeatenColors;
     public string LevelDataKey;
+    public string PrerequisiteLevelDataKey;
 
 	void Awake()
     {
-        if (DataHelper.GetLevelWon(LevelDataKey)) { GetComponent<Button>().colors = BeatenColors; }  
+        Button b = GetComponent<Button>();
+        if (!DataHelper.GetLevelWon(PrerequisiteLevelDataKey)) { b.interactable = false; }
+        else if (DataHelper.GetLevelWon(LevelDataKey)) { b.colors = BeatenColors; }  
     }
 
 
