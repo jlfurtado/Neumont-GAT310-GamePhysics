@@ -40,6 +40,7 @@ public class BallController : MonoBehaviour {
     public void StopMoving()
     {
         myRigidbody.velocity = Vector3.zero;
+        myRigidbody.angularVelocity = Vector3.zero;
     }
 
     void Update()
