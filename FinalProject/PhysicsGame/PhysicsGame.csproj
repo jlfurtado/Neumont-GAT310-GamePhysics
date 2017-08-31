@@ -82,8 +82,10 @@
     <Compile Include="Assets\Scripts\BeatenColor.cs" />
     <Compile Include="Assets\Scripts\BombMech.cs" />
     <Compile Include="Assets\Scripts\DataHelper.cs" />
+    <Compile Include="Assets\Scripts\FaceCamera.cs" />
     <Compile Include="Assets\Scripts\GhostBlockController.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\Scripts\KeepMe.cs" />
     <Compile Include="Assets\Scripts\Layers.cs" />
     <Compile Include="Assets\Scripts\LoadHowYouDidText.cs" />
     <Compile Include="Assets\Scripts\MyHelperFuncs.cs" />

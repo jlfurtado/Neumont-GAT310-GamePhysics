@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     public BallController Ball;
-    
+
+    private AudioSource interactSFX;
     private const int LEFT_MOUSE = 0;
     //private bool placingSphere;
     //private Interactable[] interactables = null;
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 	void Awake()
     {
         //placingSphere = true;
+        interactSFX = GameObject.FindGameObjectWithTag(Tags.INTERACT_SFX).GetComponent<AudioSource>();
 
         Ball.gameObject.name = "PlayerBall";
 
@@ -50,12 +52,13 @@ public class PlayerController : MonoBehaviour {
             //placingSphere = false;
             Ball.PlacePlane = rco.transform.gameObject;
             Ball.StopMoving();
-
+            interactSFX.Play();
         }
         else if (rco.collider.CompareTag(Tags.INTERACTABLE))
         {
             Interactable clickedObj = rco.collider.gameObject.GetComponentInParent<Interactable>(); // TODO CHANGE THIS LATER!!!
             clickedObj.Interact();
+            interactSFX.Play();
         }
     }
 

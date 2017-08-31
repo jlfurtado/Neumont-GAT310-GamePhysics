@@ -18,9 +18,11 @@ public class BallController : MonoBehaviour {
     private float victoryTime = 0.0f;
     private Text timeText;
     private const string BAST_TIME = "Time: ";
+    private AudioSource goofSFX;
 
     void Awake()
     {
+        goofSFX = GameObject.FindGameObjectWithTag(Tags.BALL_GOOF_SFX).GetComponent<AudioSource>();
         timeText = GameObject.FindGameObjectWithTag(Tags.TIME_TEXT).GetComponent<Text>();
         myRenderer = GetComponent<Renderer>();
         baseColor = myRenderer.material.color;
@@ -109,11 +111,12 @@ public class BallController : MonoBehaviour {
 
     public void Reset()
     {
+        goofSFX.Play();
         stopAccumulator = 0.0f;
         victoryTime = 0.0f;
         SetTimeText();
         StopMoving();
-        PlacePlane.SetActive(true);
+        if (PlacePlane != null) { PlacePlane.SetActive(true); }
         gameObject.SetActive(false);
     }
 

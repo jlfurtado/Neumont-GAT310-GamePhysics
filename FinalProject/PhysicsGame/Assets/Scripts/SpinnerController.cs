@@ -23,6 +23,6 @@ public class SpinnerController : Interactable {
     public override void Interact()
     {
         dir = -dir;
-        myRigidBody.angularVelocity = -myRigidBody.angularVelocity; 
+        myRigidBody.angularVelocity = -myRigidBody.angularVelocity;
     }
 }
