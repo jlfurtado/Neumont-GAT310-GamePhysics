@@ -1,8 +1,0 @@
-﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/src/BulletInverseDynamics/CMakeLists.txt
-  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/src/BulletInverseDynamics/CMakeFiles/generate.stamp is up-to-date.
-  IDMath.cpp
-  MultiBodyTree.cpp
-  MultiBodyTreeInitCache.cpp
-  MultiBodyTreeImpl.cpp
-  Generating Code...
-  BulletInverseDynamics.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\lib\Debug\BulletInverseDynamics_Debug.lib

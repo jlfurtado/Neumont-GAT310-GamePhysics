@@ -1,4 +1,0 @@
-﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/Extras/GIMPACTUtils/CMakeLists.txt
-  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/Extras/GIMPACTUtils/CMakeFiles/generate.stamp is up-to-date.
-  btGImpactConvexDecompositionShape.cpp
-  GIMPACTUtils.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\lib\Debug\GIMPACTUtils_Debug.lib

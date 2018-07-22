@@ -1,8 +1,0 @@
-﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/Extras/Serialize/BulletFileLoader/CMakeLists.txt
-  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/Extras/Serialize/BulletFileLoader/CMakeFiles/generate.stamp is up-to-date.
-  bChunk.cpp
-  bDNA.cpp
-  bFile.cpp
-  btBulletFile.cpp
-  Generating Code...
-  BulletFileLoader.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\lib\Debug\BulletFileLoader_Debug.lib

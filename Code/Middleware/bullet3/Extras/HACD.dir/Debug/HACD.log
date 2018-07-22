@@ -1,8 +1,0 @@
-﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/Extras/HACD/CMakeLists.txt
-  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/Extras/HACD/CMakeFiles/generate.stamp is up-to-date.
-  hacdGraph.cpp
-  hacdHACD.cpp
-  hacdICHull.cpp
-  hacdManifoldMesh.cpp
-  Generating Code...
-  HACD.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\lib\Debug\HACD_Debug.lib

@@ -1,5 +1,0 @@
-﻿  Building Custom Rule C:/Users/jfurtado/Desktop/bullet3-2.86.1/examples/HelloWorld/CMakeLists.txt
-  CMake does not need to re-run because C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/examples/HelloWorld/CMakeFiles/generate.stamp is up-to-date.
-  HelloWorld.cpp
-  App_HelloWorld.vcxproj -> C:\Advanced Game Physics\2017.advancedgamephysics.justinfurtado\Code\Middleware\bullet3\examples\HelloWorld\Debug\App_HelloWorld.exe
-  App_HelloWorld.vcxproj -> C:/Advanced Game Physics/2017.advancedgamephysics.justinfurtado/Code/Middleware/bullet3/examples/HelloWorld/Debug/App_HelloWorld.pdb (Full PDB)
